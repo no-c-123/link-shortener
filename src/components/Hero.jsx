@@ -14,7 +14,7 @@ const Hero = () => {
         if (!link) return;
     
         try {
-            const response = await fetch('http://localhost:5001/shorten', {
+            const response = await fetch('https://link-shortener-backend-production.up.railway.app/shorten', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ originalUrl: link }),
