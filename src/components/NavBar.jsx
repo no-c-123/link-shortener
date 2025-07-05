@@ -61,8 +61,11 @@ export default function NavBar() {
                     ))}
                 </div>
                 {user ? (
-                    <button className='bg-red-500 text-white w-26 h-10 rounded-[30px] hover:bg-red-700 duration-300 transition'>
-                        Logout
+                    <button 
+                        className='bg-white text-black w-26 h-10 rounded-[30px] hover:bg-gray-300 duration-300 transition'
+                        onClick={() => window.location.href = '/account'}
+                    >
+                        Account
                     </button>
                 ): (
                     <a 
