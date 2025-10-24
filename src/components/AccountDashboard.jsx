@@ -188,6 +188,45 @@ const AccountDashboard = () => {
                                         Edit Password
                                     </button>
                                 </div>
+                                {/* 2FA Row */}
+                                <div className="flex items-center justify-between gap-6">
+                                    <div className="flex-1">
+                                        <label className="block text-gray-400 mb-1">Two-Factor Authentication (2FA)</label>
+                                        <p className="text-gray-500 text-sm">
+                                            Adds an extra layer of security to your account.
+                                        </p>
+                                    </div>
+                                    <button
+                                        onClick={async () => {
+                                            // Fetch user profile
+                                            const { data: profile, error: fetchError } = await supabase
+                                                .from('profiles')
+                                                .select('two_factor_enabled')
+                                                .eq('user_id', user.id)
+                                            console.log(profile);
+
+                                            if (fetchError) {
+                                                setFeedback(fetchError.message);
+                                                return;
+                                            }
+
+                                            // Toggle 2FA
+                                            const { error: updateError } = await supabase
+                                                .from('profiles')
+                                                .update({ two_factor_enabled: !profile.two_factor_enabled })
+                                                .eq('user_id', user.id);
+
+                                            if (updateError) {
+                                                setFeedback(updateError.message);
+                                            } else {
+                                                setFeedback(!profile.two_factor_enabled ? '2FA Enabled.' : '2FA Disabled.');
+                                            }
+                                        }}
+                                        className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-3 rounded transition"
+                                    >
+                                        Toggle 2FA
+                                    </button>
+                                </div>
                             </div>
 
                             {feedback && <p className="text-green-500 mt-4">{feedback}</p>}

@@ -1,0 +1,16 @@
+/* For View Transition API smoothness */
+::view-transition-old(stats),
+::view-transition-new(stats) {
+  animation-duration: 300ms;
+  animation-timing-function: ease;
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+/* Optional: fade background behind transition */
+::view-transition-old(stats) {
+  z-index: 40;
+}
+::view-transition-new(stats) {
+  z-index: 50;
+}

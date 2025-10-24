@@ -14,31 +14,53 @@ const RegisterForm = () => {
     const handleRegister = async (e) => {
         e.preventDefault();
         setError('');
-
+    
         if (password !== confirmPassword) {
             setError('Passwords do not match.');
             return;
         }
-
+    
         setLoading(true);
-
-        // Correct Supabase registration request
+    
+        // Step 1: Register user
         const { data, error } = await supabase.auth.signUp({
             email,
             password,
             options: {
-                data: { name: name.trim(), lastname: lastname.trim() }, // Store extra user info
+                data: { name: name.trim(), lastname: lastname.trim() }, // optional user metadata
             },
         });
-
+    
         if (error) {
             console.error(error);
             setError(error.message);
-        } else {
-            console.log('Registration successful:', data);
-            window.location.href = '/login'; // Redirect to login after success
+            setLoading(false);
+            return;
         }
-
+    
+        // Step 2: Insert profile
+        const userId = data.user?.id;
+    
+        if (userId) {
+            const { error: insertError } = await supabase.from('profiles').insert({
+                user_id: userId,
+                two_factor_enabled: false,
+                two_factor_secret: null,
+            });
+    
+            if (insertError) {
+                console.error(insertError);
+                setError(insertError.message);
+                setLoading(false);
+                return;
+            }
+    
+            // Step 3: Redirect to login
+            window.location.href = '/login';
+        } else {
+            setError('User ID not found during registration.');
+        }
+    
         setLoading(false);
     };
 
