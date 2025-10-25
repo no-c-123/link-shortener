@@ -26,50 +26,12 @@ const Login = () => {
             return;
         }
     
-        // Step 2: Check if user has 2FA enabled
-        const { data: profile, error: profileError } = await supabase
-            .from('profiles')
-            .select('two_factor_enabled')
-            .eq('user_id', data.user.id)
-            .single();
-    
-        if (profileError) {
-            setError(profileError.message);
-            setLoading(false);
-            return;
-        }
-    
-        if (profile && profile.two_factor_enabled) {
-            // Step 1: Generate 6-digit code
-            const code = Math.floor(100000 + Math.random() * 900000).toString();
+          if (data.user) {
         
-            // Step 2: Save the code to the profile
-            const { error: updateError } = await supabase
-                .from('profiles')
-                .update({ two_factor_secret: code })
-                .eq('user_id', data.user.id);
-        
-            if (updateError) {
-                setError(updateError.message);
-                setLoading(false);
-                return;
-            }
-        
-            // ✅ Step 3: Send email via Edge Function
-            const { error: functionError } = await supabase.functions.invoke('send-2fa-code', {
-                body: { email, code }
-            });
-        
-            if (functionError) {
-                setError('Failed to send 2FA code.');
-                setLoading(false);
-                return;
-            }
-        
-            // Step 4: Redirect to verification page
-            window.location.href = `/verify?user=${data.user.id}`;
+            // Step 4: Redirect to dashboard
+            window.location.href = '/account';
         } else {
-            // If 2FA is not enabled, go straight to dashboard
+
             window.location.href = '/account';
         }
     

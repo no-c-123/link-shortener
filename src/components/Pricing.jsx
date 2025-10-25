@@ -1,4 +1,7 @@
-// components/Pricing.jsx
+import React, {useRef} from "react";
+
+
+
 const Pricing = () => {
     const featureList = [
         ['One-click link shortening', 'Allows you to shorten a link instantly with a single click.'],
@@ -15,13 +18,21 @@ const Pricing = () => {
         ['Link preview customization', 'Change the link title, image, and description shown on social media.'],
     ];
 
+    const buttonPricingRef = useRef(null);
+
+    const handleClick = () => {
+        if(buttonPricingRef.current) {
+            window.location.href = '/payment';
+        }
+    }
+
     return (
         <section id="pricing" className="min-h-screen flex flex-col justify-center items-center text-center bg-gradient-to-br from-black to-gray-900 text-white px-4 py-16">
             <h2 className="text-4xl md:text-6xl font-bold mb-10">Pricing</h2>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mb-16">
+            <div className="rounded-2xl grid grid-cols-1 md:grid-cols-3 gap-8 min-w-7xl mb-16 justify-evenly">
                 {/* Free Plan */}
-                <div className="border border-white rounded-lg p-8 bg-zinc-800">
+                <div className="border border-white rounded-lg p-8 bg-zinc-800 text-white justify-center flex flex-col items-center">
                     <h3 className="text-2xl font-bold mb-4">Free</h3>
                     <p className="text-4xl font-bold mb-6">$0<span className="text-lg font-medium">/mo</span></p>
                     <ul className="space-y-4 mb-6 text-gray-300 text-left">
@@ -37,7 +48,7 @@ const Pricing = () => {
                 </div>
 
                 {/* Starter Plan */}
-                <div className="border border-purple-500 rounded-lg p-8 bg-zinc-900">
+                <div className="border border-white rounded-lg p-8 bg-zinc-800 text-white justify-center flex flex-col items-center">
                     <h3 className="text-2xl font-bold mb-4">Starter <span className="text-sm text-purple-400">(Coming Soon)</span></h3>
                     <p className="text-4xl font-bold mb-6">$5<span className="text-lg font-medium">/mo</span></p>
                     <ul className="space-y-4 mb-6 text-gray-300 text-left">
@@ -47,13 +58,13 @@ const Pricing = () => {
                         <li>✅ Limited custom branded links</li>
                         <li>✅ Standard API access</li>
                     </ul>
-                    <button disabled className="bg-gray-700 text-white px-6 py-3 rounded-full cursor-not-allowed">
-                        Coming Soon
+                    <button ref={buttonPricingRef} onClick={handleClick}  className="bg-purple-700 hover:bg-purple-800 text-white px-6 py-3 rounded-full transition">
+                        Upgrade Plan
                     </button>
                 </div>
 
                 {/* Pro Plan */}
-                <div className="border border-purple-500 rounded-lg p-8 bg-zinc-900">
+                <div className="border border-white rounded-lg p-8 bg-zinc-800 text-white justify-center flex flex-col items-center">
                     <h3 className="text-2xl font-bold mb-4">Pro <span className="text-sm text-purple-400">(Coming Soon)</span></h3>
                     <p className="text-4xl font-bold mb-6">$10<span className="text-lg font-medium">/mo</span></p>
                     <ul className="space-y-4 mb-6 text-gray-300 text-left">
@@ -65,8 +76,8 @@ const Pricing = () => {
                         <li>✅ UTM builder integration</li>
                         <li>✅ Link preview customization</li>
                     </ul>
-                    <button disabled className="bg-gray-700 text-white px-6 py-3 rounded-full cursor-not-allowed">
-                        Coming Soon
+                    <button ref={buttonPricingRef} onClick={handleClick}  className="bg-purple-700 hover:bg-purple-800 text-white px-6 py-3 rounded-full transition">
+                        Upgrade Plan
                     </button>
                 </div>
             </div>

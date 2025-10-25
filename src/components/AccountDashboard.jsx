@@ -14,7 +14,6 @@ const AccountDashboard = () => {
     const [confirmPassword, setConfirmPassword] = useState('');
 
     const [emailChangeStep, setEmailChangeStep] = useState(1);
-    const [twoFACode, setTwoFACode] = useState('');
 
     const [feedback, setFeedback] = useState('');
 
@@ -67,15 +66,6 @@ const AccountDashboard = () => {
 
         setEmailChangeStep(2);
     };
-
-    const handleVerify2FA = async () => {
-        console.log('2FA code entered: ', twoFACode);
-        setIsEmailModalOpen(false);
-        setEmailChangeStep(1);
-        setNewEmail('');
-        setTwoFACode('');
-        setFeedback('Email change submitted successfully! Please check your inbox.');
-    }
 
     const handleChangePassword = async () => {
         if (newPassword !== confirmPassword) {
@@ -188,48 +178,9 @@ const AccountDashboard = () => {
                                         Edit Password
                                     </button>
                                 </div>
-                                {/* 2FA Row */}
-                                <div className="flex items-center justify-between gap-6">
-                                    <div className="flex-1">
-                                        <label className="block text-gray-400 mb-1">Two-Factor Authentication (2FA)</label>
-                                        <p className="text-gray-500 text-sm">
-                                            Adds an extra layer of security to your account.
-                                        </p>
-                                    </div>
-                                    <button
-                                        onClick={async () => {
-                                            // Fetch user profile
-                                            const { data: profile, error: fetchError } = await supabase
-                                                .from('profiles')
-                                                .select('two_factor_enabled')
-                                                .eq('user_id', user.id)
-                                            console.log(profile);
-
-                                            if (fetchError) {
-                                                setFeedback(fetchError.message);
-                                                return;
-                                            }
-
-                                            // Toggle 2FA
-                                            const { error: updateError } = await supabase
-                                                .from('profiles')
-                                                .update({ two_factor_enabled: !profile.two_factor_enabled })
-                                                .eq('user_id', user.id);
-
-                                            if (updateError) {
-                                                setFeedback(updateError.message);
-                                            } else {
-                                                setFeedback(!profile.two_factor_enabled ? '2FA Enabled.' : '2FA Disabled.');
-                                            }
-                                        }}
-                                        className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-3 rounded transition"
-                                    >
-                                        Toggle 2FA
-                                    </button>
-                                </div>
+                                
                             </div>
 
-                            {feedback && <p className="text-green-500 mt-4">{feedback}</p>}
                         </div>
                     )}
 
@@ -288,28 +239,7 @@ const AccountDashboard = () => {
                     </div>
                 )}
 
-                {emailChangeStep === 2 && (
-                        <div>
-                            <p className="text-gray-400 text-sm mb-4">
-                                We’ve sent a 6-digit verification code to your current email address. Please enter it below to confirm your email change.
-                            </p>
-
-                            <input
-                                type="text"
-                                placeholder="Enter 2FA Code"
-                                value={twoFACode}
-                                onChange={(e) => setTwoFACode(e.target.value)}
-                                className="w-full p-4 rounded bg-gray-700 text-white mb-4"
-                            />
-
-                            <button
-                                onClick={handleVerify2FA}
-                                className="bg-purple-700 hover:bg-purple-800 px-4 py-2 rounded text-white w-full"
-                            >
-                                Verify Code
-                            </button>
-                        </div>
-                    )}
+                
             </Modal>
 
             {/* Password Modal */}
