@@ -4,9 +4,9 @@ import { useEffect, useState } from 'react';
 
 export default function NavBar() {
     const navLinks = [
-        { name: 'Inicio', to: 'hero' },       // ID of the Hero section
-        { name: 'Acerca de', to: 'about' },   // ID of the About section
-        { name: 'Precios', to: 'pricing' },   // ID of the Pricing section
+        { name: 'Main', to: 'hero' },       // ID of the Hero section
+        { name: 'About', to: 'about' },   // ID of the About section
+        { name: 'Pricing', to: 'pricing' },   // ID of the Pricing section
     ];
 
     const [user, setUser] = useState(null);
@@ -33,6 +33,7 @@ export default function NavBar() {
             authListener.subscription.unsubscribe();
         };
     }, []);
+
 
     const handleLogout = async () => {
         await supabase.auth.signOut();

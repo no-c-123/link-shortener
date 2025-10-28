@@ -83,10 +83,10 @@ const AccountDashboard = () => {
             setConfirmPassword('');
         }
     };
-
+    
     return (
         <section className="min-h-screen flex bg-gradient-to-br from-black to-gray-900 text-white justify-center items-center">
-            <div className="bg-zinc-800 p-8 rounded-lg w-full max-w-4xl shadow-lg flex gap-8">
+            <div className="bg-zinc-800 p-8 rounded-lg w-full max-w-4xl shadow-lg flex gap-8 h-[50vh]">
                 {/* Sidebar */}
                 <aside className="w-64 bg-zinc-900 p-6 space-y-6 rounded-lg">
                     <h2 className="text-xl font-bold mb-4">Account</h2>
@@ -121,13 +121,13 @@ const AccountDashboard = () => {
                 {/* Main Section */}
                 <main className="flex-1 p-8 space-y-6">
                     {activeSection === 'settings' && user && (
-                        <div>
+                        <div className='h-0'>
                             <h2 className="text-3xl font-bold mb-6">Account Settings</h2>
                             <div className="space-y-6">
                                 {/* Email Row */}
-                                <div className="flex items-center justify-between gap-6">
-                                    <div className="flex-1">
-                                        <label className="block text-gray-400 mb-1">Email</label>
+                                <div className="grid grid-cols-3 justify-start gap-6">
+                                    <div className="col-span-2 flex flex-col justify-start">
+                                        <label className="block text-gray-400">Email</label>
                                         <input
                                             type="text"
                                             value={user.email}
@@ -135,26 +135,29 @@ const AccountDashboard = () => {
                                             className="w-full p-3 rounded bg-gray-700 text-white"
                                         />
                                     </div>
-                                    <button
-                                        style={{ ViewTransitionName: 'emailTransition' }}
-                                        onClick={() => {
-                                            if (document.startViewTransition) {
-                                                document.startViewTransition(() => {
+                                    <div className='flex flex-col justify-end items-center'>
+                                        <label className='block text-transparent'></label>
+                                        <button
+                                            style={{ ViewTransitionName: 'emailTransition' }}
+                                            onClick={() => {
+                                                if (document.startViewTransition) {
+                                                    document.startViewTransition(() => {
+                                                        setIsEmailModalOpen(true);
+                                                    });
+                                                }else {
                                                     setIsEmailModalOpen(true);
-                                                });
-                                            }else {
-                                                setIsEmailModalOpen(true);
-                                            }
-                                        }}
-                                        className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-3 rounded transition"
-                                    >
-                                        Edit Email
-                                    </button>
+                                                }
+                                            }}
+                                            className="bg-purple-700 hover:bg-purple-800 text-white px-4 py-3 rounded transition w-[150px]"
+                                        >
+                                            Edit Email
+                                        </button>
+                                    </div>
                                 </div>
 
                                 {/* Password Row */}
-                                <div className="flex items-center justify-between gap-6">
-                                    <div className="flex-1">
+                                <div className="grid grid-cols-3 justify-start gap-6">
+                                    <div className="col-span-2 flex flex-col justify-start">
                                         <label className="block text-gray-400 mb-1">Password</label>
                                         <input
                                             type="password"
@@ -163,20 +166,23 @@ const AccountDashboard = () => {
                                             className="w-full p-3 rounded bg-gray-700 text-white"
                                         />
                                     </div>
-                                    <button
-                                        onClick={() => {
-                                            if (document.startViewTransition) {
-                                                document.startViewTransition(() => {
+                                    <div className='flex flex-col justify-end items-center'>
+                                        <label className='block text-transparent'></label>
+                                        <button
+                                            onClick={() => {
+                                                if (document.startViewTransition) {
+                                                    document.startViewTransition(() => {
+                                                        setIsPasswordModalOpen(true);
+                                                    })
+                                                } else {
                                                     setIsPasswordModalOpen(true);
-                                                })
-                                            } else {
-                                                setIsPasswordModalOpen(true);
-                                            }
-                                        }}
-                                        className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-3 rounded transition"
-                                    >
-                                        Edit Password
-                                    </button>
+                                                }
+                                            }}
+                                            className="bg-purple-700 hover:bg-purple-800 text-white px-4 py-3 rounded transition w-[150px]"
+                                        >
+                                            Edit Password
+                                        </button>
+                                    </div>
                                 </div>
                                 
                             </div>

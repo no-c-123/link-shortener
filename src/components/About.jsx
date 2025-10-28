@@ -26,7 +26,7 @@ export default function About() {
             <h2 className="text-2xl font-semibold mb-4">📂 Key Features</h2>
             <ul className="text-left text-gray-300 space-y-2 list-disc list-inside">
               <li>🔗 One-click link shortening with instant access</li>
-              <li>📈 Trackable links (coming soon)</li>
+              <li>📈 Trackable links</li>
               <li>⚡ Fast redirection and reliable uptime</li>
               <li>🎨 Clean, user-friendly design with no ads</li>
               <li>🔒 Secure handling with backend API integration</li>

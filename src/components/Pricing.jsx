@@ -40,7 +40,7 @@ const Pricing = () => {
                         <li>✅ Instant access</li>
                         <li>✅ Clean, ad-free interface</li>
                         <li>✅ Secure API handling</li>
-                        <li>🚧 Basic link history (coming soon)</li>
+                        <li>✅ Basic link history</li>
                     </ul>
                     <button className="bg-purple-700 hover:bg-purple-800 text-white px-6 py-3 rounded-full transition">
                         Get Started
@@ -49,7 +49,7 @@ const Pricing = () => {
 
                 {/* Starter Plan */}
                 <div className="border border-white rounded-lg p-8 bg-zinc-800 text-white justify-center flex flex-col items-center">
-                    <h3 className="text-2xl font-bold mb-4">Starter <span className="text-sm text-purple-400">(Coming Soon)</span></h3>
+                    <h3 className="text-2xl font-bold mb-4">Starter</h3>
                     <p className="text-4xl font-bold mb-6">$5<span className="text-lg font-medium">/mo</span></p>
                     <ul className="space-y-4 mb-6 text-gray-300 text-left">
                         <li>✅ All Free features</li>
@@ -65,7 +65,7 @@ const Pricing = () => {
 
                 {/* Pro Plan */}
                 <div className="border border-white rounded-lg p-8 bg-zinc-800 text-white justify-center flex flex-col items-center">
-                    <h3 className="text-2xl font-bold mb-4">Pro <span className="text-sm text-purple-400">(Coming Soon)</span></h3>
+                    <h3 className="text-2xl font-bold mb-4">Pro</h3>
                     <p className="text-4xl font-bold mb-6">$10<span className="text-lg font-medium">/mo</span></p>
                     <ul className="space-y-4 mb-6 text-gray-300 text-left">
                         <li>✅ All Starter features</li>
