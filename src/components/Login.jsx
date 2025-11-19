@@ -40,6 +40,9 @@ const Login = () => {
 
     return (
         <section className="min-h-screen flex flex-col justify-center items-center bg-gradient-to-br from-black to-gray-900 text-white px-4">
+            <a href="/" className="absolute top-4 left-4 text-purple-400 hover:text-purple-300 underline text-sm">
+                ← Back to Home
+            </a>
             <form onSubmit={handleLogin} className="flex flex-col gap-4 max-w-md w-full bg-zinc-800 p-8 rounded-lg">
                 <h2 className="text-3xl font-bold mb-4 text-center">Login to SnapLink</h2>
 

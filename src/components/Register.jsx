@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { supabase } from '../lib/supabaseClient';
-import Input from './uicomponents/Inputs'; // Your custom input
+import Input from './uicomponents/Inputs';
+import PasswordStrength from './PasswordStrength';
 
 const RegisterForm = () => {
     const [name, setName] = useState('');
@@ -66,6 +67,9 @@ const RegisterForm = () => {
 
     return (
         <section className="min-h-screen flex justify-center items-center bg-gradient-to-br from-black to-gray-900 px-4">
+            <a href="/" className="absolute top-4 left-4 text-purple-400 hover:text-purple-300 underline text-sm">
+                ← Back to Home
+            </a>
             <form
                 onSubmit={handleRegister}
                 className="bg-zinc-800 p-8 rounded-lg shadow-lg w-full max-w-md text-center"
@@ -94,13 +98,16 @@ const RegisterForm = () => {
                         placeholder="Email"
                         label="Email"
                     />
-                    <Input
-                        type="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        placeholder="Password"
-                        label="Password"
-                    />
+                    <div>
+                        <Input
+                            type="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            placeholder="Password"
+                            label="Password"
+                        />
+                        <PasswordStrength password={password} />
+                    </div>
                     <Input
                         type="password"
                         value={confirmPassword}

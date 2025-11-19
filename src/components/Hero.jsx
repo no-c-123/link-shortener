@@ -4,8 +4,11 @@ import '../styles/Hero-transitions.css'
 const Hero = () => {
     const [link, setLink] = useState("");
     const [shortenedLink, setShortenedLink] = useState("");
+    const [customCode, setCustomCode] = useState("");
+    const [showCustomCode, setShowCustomCode] = useState(false);
     const [copied, setCopied] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [error, setError] = useState("");
     const inputRef = useRef(null);
 
     const [previewData, setPreviewData] = useState(null);
@@ -20,34 +23,44 @@ const Hero = () => {
     ];
 
     const handleShorten = async () => {
-        if (!link) return;
+        if (!link) {
+            setError("Please enter a URL");
+            return;
+        }
         setLoading(true);
         setShortenedLink("");
         setCopied(false);
         setPreviewData(null);
+        setError("");
 
         try {
-            const response = await fetch('https://link-shortener-backend-production.up.railway.app/shorten', {
+            const backendUrl = import.meta.env.PUBLIC_BACKEND_URL || 'https://link-shortener-backend-production.up.railway.app';
+            const response = await fetch(`${backendUrl}/shorten`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ originalUrl: link }),
+                body: JSON.stringify({ 
+                    originalUrl: link,
+                    customCode: customCode.trim() || undefined
+                }),
             });
 
             const data = await response.json();
 
             if (response.ok) {
                 setShortenedLink(data.shortUrl);
+                setCustomCode("");
 
                 // Fetch preview info
                 const code = data.shortUrl.split("/").pop();
-                const previewRes = await fetch(`https://link-shortener-backend-production.up.railway.app/info/${code}`);
+                const previewRes = await fetch(`${backendUrl}/info/${code}`);
                 const previewJson = await previewRes.json();
                 setPreviewData(previewJson);
             } else {
-                console.error("Shorten failed:", data);
+                setError(data.error || data.details || "Failed to shorten link");
             }
         } catch (error) {
             console.error('Error shortening link:', error);
+            setError("Network error. Please try again.");
         }
 
         setLoading(false);
@@ -75,26 +88,54 @@ const Hero = () => {
                 Shorten your links. Share instantly. Snap it now with style.
             </p>
 
-            <div className="flex flex-col sm:flex-row items-center gap-4 w-full max-w-xl mb-8">
-                <input
-                    ref={inputRef}
-                    type="text"
-                    value={link}
-                    autoFocus
-                    onChange={(e) => setLink(e.target.value)}
-                    onKeyDown={handleKeyDown}
-                    placeholder="Paste your link here..."
-                    className="w-full px-4 py-3 rounded-full focus:outline-none text-white border border-white bg-transparent"
-                />
-                <button
-                    onClick={handleShorten}
-                    disabled={loading}
-                    className={`px-6 py-3 rounded-full transition ${
-                        loading ? "bg-gray-600" : "bg-purple-700 hover:bg-purple-800"
-                    }`}
-                >
-                    {loading ? "Shortening..." : "Shorten"}
-                </button>
+            <div className="flex flex-col items-center gap-4 w-full max-w-xl mb-8">
+                <div className="flex flex-col sm:flex-row items-center gap-4 w-full">
+                    <input
+                        ref={inputRef}
+                        type="text"
+                        value={link}
+                        autoFocus
+                        onChange={(e) => setLink(e.target.value)}
+                        onKeyDown={handleKeyDown}
+                        placeholder="Paste your link here..."
+                        className="w-full px-4 py-3 rounded-full focus:outline-none text-white border border-white bg-transparent"
+                    />
+                    <button
+                        onClick={handleShorten}
+                        disabled={loading}
+                        className={`px-6 py-3 rounded-full transition whitespace-nowrap ${
+                            loading ? "bg-gray-600" : "bg-purple-700 hover:bg-purple-800"
+                        }`}
+                    >
+                        {loading ? "Shortening..." : "Shorten"}
+                    </button>
+                </div>
+                <div className="w-full flex items-center gap-2">
+                    <button
+                        onClick={() => setShowCustomCode(!showCustomCode)}
+                        className="text-sm text-purple-400 hover:text-purple-300 underline"
+                    >
+                        {showCustomCode ? "Hide" : "Add"} custom code
+                    </button>
+                </div>
+                {showCustomCode && (
+                    <div className="w-full">
+                        <input
+                            type="text"
+                            value={customCode}
+                            onChange={(e) => setCustomCode(e.target.value.replace(/[^a-zA-Z0-9-]/g, ''))}
+                            placeholder="Custom code (optional, letters, numbers, hyphens only)"
+                            className="w-full px-4 py-2 rounded-full focus:outline-none text-white border border-purple-500 bg-transparent text-sm"
+                            maxLength={20}
+                        />
+                        <p className="text-xs text-gray-400 mt-1">Leave empty for auto-generated code</p>
+                    </div>
+                )}
+                {error && (
+                    <div className="w-full bg-red-900/50 border border-red-500 text-red-200 px-4 py-2 rounded-full text-sm">
+                        {error}
+                    </div>
+                )}
             </div>
 
             <p className="text-gray-400 mb-4">Here are some example links you can try:</p>

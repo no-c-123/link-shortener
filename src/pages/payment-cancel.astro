@@ -1,0 +1,37 @@
+---
+import Layout from "../layouts/Layout.astro"
+---
+
+<Layout>
+    <div class="min-h-screen flex flex-col justify-center items-center bg-gradient-to-br from-black to-gray-900 text-white px-4">
+        <div class="bg-zinc-800 p-8 rounded-lg shadow-lg max-w-md w-full text-center">
+            <div class="mb-6">
+                <svg class="w-20 h-20 mx-auto text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                </svg>
+            </div>
+            <h1 class="text-3xl font-bold mb-4">Payment Cancelled</h1>
+            <p class="text-gray-400 mb-6" id="error-message">Your payment was cancelled. No charges were made.</p>
+            <div class="space-y-4">
+                <a href="/payment" class="block bg-purple-700 hover:bg-purple-800 text-white px-6 py-3 rounded-full transition">
+                    Try Again
+                </a>
+                <a href="/" class="block text-purple-400 hover:text-purple-300 underline">
+                    Return to Home
+                </a>
+            </div>
+        </div>
+    </div>
+    <script>
+        const urlParams = new URLSearchParams(window.location.search);
+        const error = urlParams.get('error');
+        if (error) {
+            const errorMsg = document.getElementById('error-message');
+            if (errorMsg) {
+                errorMsg.textContent = `Payment failed: ${decodeURIComponent(error)}`;
+                errorMsg.classList.add('text-red-400');
+            }
+        }
+    </script>
+</Layout>
+

@@ -9,7 +9,7 @@ import {
 } from "@stripe/react-stripe-js";
 
 const stripePromise = loadStripe(
-  "pk_test_51SLaJD1XOMQG7oTnvqLzPuyH6B5wo1HtNL78DefSrcEhuiQ96e9V3BHznO4GNNTK49pxnpfXeBqcsH2w7V0Pbclv00B6Bbbti1"
+  import.meta.env.PUBLIC_STRIPE_PUBLISHABLE_KEY || ""
 );
 
 function CheckoutForm({ amount, planName }) {
@@ -54,14 +54,18 @@ function CheckoutForm({ amount, planName }) {
     e.preventDefault();
     if (!stripe || !elements) return;
 
+    const returnUrl = `${window.location.origin}/payment-success`;
     const { error } = await stripe.confirmPayment({
       elements,
       confirmParams: {
-        return_url: "http://localhost:4321/success",
+        return_url: returnUrl,
       },
     });
 
-    if (error) alert(error.message);
+    if (error) {
+      // Redirect to cancel page on error
+      window.location.href = '/payment-cancel?error=' + encodeURIComponent(error.message);
+    }
   };
 
   return (
@@ -169,7 +173,10 @@ const Payment = () => {
 
   return (
     <Elements stripe={stripePromise}>
-      <div className="flex flex-col justify-center items-center text-black min-h-screen">
+      <div className="flex flex-col justify-center items-center text-black min-h-screen relative">
+        <a href="/" className="absolute top-4 left-4 text-purple-400 hover:text-purple-300 underline text-sm z-10">
+          ← Back to Home
+        </a>
         <div className="border-2 border-black rounded-2xl h-[10vh] w-[20vw] flex justify-around items-center mb-10 transition transform duration-500 ease-out">
           <button className="border-2 w-40 h-20 rounded-2xl text-white focus:text-black focus:bg-white transition duration-300 active:translate-x-full">
             Monthly
