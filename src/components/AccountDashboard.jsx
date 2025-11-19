@@ -415,29 +415,119 @@ const AccountDashboard = () => {
                             {transactionsLoading ? (
                                 <p className="text-gray-400">Loading transactions...</p>
                             ) : transactions.length === 0 ? (
-                                <p className="text-gray-400">No transactions found.</p>
+                                <div className="text-center py-12">
+                                    <svg className="w-16 h-16 mx-auto text-gray-600 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"></path>
+                                    </svg>
+                                    <p className="text-gray-400">No transactions found.</p>
+                                    <a href="/payment" className="inline-block mt-4 text-purple-400 hover:text-purple-300 underline">
+                                        Make your first purchase
+                                    </a>
+                                </div>
                             ) : (
                                 <div className="space-y-4">
                                     {transactions.map((tx) => (
-                                        <div key={tx.id} className="bg-zinc-900 p-4 rounded-lg">
+                                        <div 
+                                            key={tx.id} 
+                                            className={`bg-zinc-900 p-4 rounded-lg border-l-4 ${
+                                                tx.refunded 
+                                                    ? 'border-yellow-500' 
+                                                    : tx.status === 'succeeded' 
+                                                        ? 'border-green-500' 
+                                                        : tx.status === 'failed'
+                                                            ? 'border-red-500'
+                                                            : 'border-gray-500'
+                                            }`}
+                                        >
                                             <div className="flex justify-between items-start">
-                                                <div>
-                                                    <p className="font-semibold">{tx.plan || 'Payment'} Plan</p>
-                                                    <p className="text-sm text-gray-400">
-                                                        {tx.payer_first_name} {tx.payer_last_name}
-                                                    </p>
-                                                    <p className="text-sm text-gray-400">{tx.payer_email}</p>
-                                                    <p className="text-xs text-gray-500 mt-2">
-                                                        {new Date(tx.created_at).toLocaleString()}
-                                                    </p>
+                                                <div className="flex-1">
+                                                    {/* Status Badge */}
+                                                    <div className="flex items-center gap-2 mb-2">
+                                                        <span className={`text-xs px-2 py-1 rounded-full font-semibold ${
+                                                            tx.refunded 
+                                                                ? 'bg-yellow-900/50 text-yellow-300' 
+                                                                : tx.status === 'succeeded'
+                                                                    ? 'bg-green-900/50 text-green-300'
+                                                                    : tx.status === 'failed'
+                                                                        ? 'bg-red-900/50 text-red-300'
+                                                                        : 'bg-gray-900/50 text-gray-300'
+                                                        }`}>
+                                                            {tx.refunded ? '↩️ REFUNDED' : tx.status.toUpperCase()}
+                                                        </span>
+                                                        <span className="font-semibold text-lg">
+                                                            {tx.plan || 'Payment'} Plan
+                                                        </span>
+                                                    </div>
+
+                                                    {/* Customer Info */}
+                                                    <div className="text-sm text-gray-400 space-y-1">
+                                                        <p>
+                                                            <span className="text-gray-500">Customer:</span>{' '}
+                                                            {tx.payer_first_name} {tx.payer_last_name}
+                                                        </p>
+                                                        <p>
+                                                            <span className="text-gray-500">Email:</span>{' '}
+                                                            {tx.payer_email}
+                                                        </p>
+                                                        {tx.card_brand && (
+                                                            <p>
+                                                                <span className="text-gray-500">Payment method:</span>{' '}
+                                                                {tx.card_brand.charAt(0).toUpperCase() + tx.card_brand.slice(1)} •••• {tx.card_last4}
+                                                            </p>
+                                                        )}
+                                                        <p className="text-xs text-gray-500 mt-2">
+                                                            <span className="text-gray-500">Transaction date:</span>{' '}
+                                                            {new Date(tx.created_at).toLocaleString()}
+                                                        </p>
+                                                        <p className="text-xs text-gray-600">
+                                                            ID: {tx.stripe_payment_intent}
+                                                        </p>
+                                                    </div>
+
+                                                    {/* Refund Info */}
+                                                    {tx.refunded && (
+                                                        <div className="mt-3 p-3 bg-yellow-900/20 border border-yellow-700/50 rounded">
+                                                            <p className="text-xs text-yellow-300 font-semibold mb-1">
+                                                                Refund Information
+                                                            </p>
+                                                            <div className="text-xs text-gray-400 space-y-1">
+                                                                {tx.refund_amount > 0 && (
+                                                                    <p>
+                                                                        <span className="text-gray-500">Refunded amount:</span>{' '}
+                                                                        ${(tx.refund_amount / 100).toFixed(2)} {tx.currency.toUpperCase()}
+                                                                    </p>
+                                                                )}
+                                                                {tx.refund_reason && (
+                                                                    <p>
+                                                                        <span className="text-gray-500">Reason:</span>{' '}
+                                                                        {tx.refund_reason}
+                                                                    </p>
+                                                                )}
+                                                                {tx.refunded_at && (
+                                                                    <p>
+                                                                        <span className="text-gray-500">Refunded on:</span>{' '}
+                                                                        {new Date(tx.refunded_at).toLocaleString()}
+                                                                    </p>
+                                                                )}
+                                                            </div>
+                                                        </div>
+                                                    )}
                                                 </div>
-                                                <div className="text-right">
-                                                    <p className="text-lg font-bold">
-                                                        ${(tx.amount / 100).toFixed(2)} {tx.currency.toUpperCase()}
+
+                                                {/* Amount Display */}
+                                                <div className="text-right ml-4">
+                                                    <p className={`text-2xl font-bold ${
+                                                        tx.refunded ? 'text-yellow-400' : 'text-green-400'
+                                                    }`}>
+                                                        {tx.refunded && tx.refund_amount > 0 ? '-' : ''}
+                                                        ${((tx.refunded ? tx.refund_amount : tx.amount) / 100).toFixed(2)}
                                                     </p>
-                                                    {tx.card_brand && (
-                                                        <p className="text-xs text-gray-400">
-                                                            {tx.card_brand} •••• {tx.card_last4}
+                                                    <p className="text-xs text-gray-400 uppercase">
+                                                        {tx.currency}
+                                                    </p>
+                                                    {tx.refunded && tx.refund_amount < tx.amount && (
+                                                        <p className="text-xs text-gray-500 mt-1">
+                                                            Original: ${(tx.amount / 100).toFixed(2)}
                                                         </p>
                                                     )}
                                                 </div>

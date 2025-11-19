@@ -17,9 +17,9 @@ const Hero = () => {
     const [showStatsModal, setShowStatsModal] = useState(false);
 
     const exampleLinks = [
-        { name: "GitHub", url: "https://github.com/no-c-123" },
-        { name: "Portfolio", url: "https://portfolio-seven-green-92.vercel.app/" },
-        { name: "LinkedIn", url: "https://www.linkedin.com/in/h%C3%A9ctor-emiliano-leal-prieto-b581a92b1/" },
+        { name: "My GitHub", url: "https://github.com/no-c-123" },
+        { name: "My Portfolio", url: "https://portfolio-seven-green-92.vercel.app/" },
+        { name: "My LinkedIn", url: "https://www.linkedin.com/in/h%C3%A9ctor-emiliano-leal-prieto-b581a92b1/" },
     ];
 
     const handleShorten = async () => {
