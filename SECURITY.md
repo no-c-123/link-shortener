@@ -52,7 +52,7 @@ SUPABASE_URL=your_supabase_project_url
 SUPABASE_ANON_KEY=your_supabase_anon_key
 
 # Stripe Configuration
-STRIPE_SECRET_KEY=sk_test_your_stripe_secret_key
+SECRET_STRIPE_PUBLISHABLE_KEY=sk_test_your_stripe_secret_key
 STRIPE_WEBHOOK_SECRET=whsec_your_webhook_secret
 
 # Encryption Key (32 bytes, base64 encoded)

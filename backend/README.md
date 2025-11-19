@@ -49,7 +49,7 @@ SUPABASE_URL=your_supabase_project_url
 SUPABASE_ANON_KEY=your_supabase_anon_key
 
 # Stripe Configuration
-STRIPE_SECRET_KEY=sk_test_your_stripe_secret_key
+SECRET_STRIPE_PUBLISHABLE_KEY=sk_test_your_stripe_secret_key
 STRIPE_WEBHOOK_SECRET=whsec_your_webhook_secret
 
 # Encryption Key (32 bytes, base64 encoded)
@@ -127,7 +127,7 @@ curl http://localhost:5000/abc12
 | `NODE_ENV` | Environment (development/production) | No |
 | `SUPABASE_URL` | Supabase project URL | Yes |
 | `SUPABASE_ANON_KEY` | Supabase anonymous key | Yes |
-| `STRIPE_SECRET_KEY` | Stripe secret key | Yes |
+| `SECRET_STRIPE_PUBLISHABLE_KEY` | Stripe secret key | Yes |
 | `STRIPE_WEBHOOK_SECRET` | Stripe webhook secret | Yes |
 | `ENCRYPTION_KEY` | 32-byte base64 encryption key | Yes |
 | `BACKEND_URL` | Backend URL for short links | No |

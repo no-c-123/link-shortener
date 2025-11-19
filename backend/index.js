@@ -150,7 +150,7 @@ function sanitizeCode(code) {
 // ✅ ENVIRONMENT VALIDATION
 // ─────────────────────────────
 function validateEnvironment() {
-  const required = ['SUPABASE_URL', 'SUPABASE_ANON_KEY', 'STRIPE_SECRET_KEY', 'ENCRYPTION_KEY'];
+  const required = ['SUPABASE_URL', 'SUPABASE_ANON_KEY', 'SECRET_STRIPE_PUBLISHABLE_KEY', 'ENCRYPTION_KEY'];
   const missing = required.filter(key => !process.env[key]);
   
   if (missing.length > 0) {
@@ -185,7 +185,7 @@ const supabase = createClient(
 // ─────────────────────────────
 // ✅ Stripe Setup
 // ─────────────────────────────
-const stripe = Stripe(process.env.STRIPE_SECRET_KEY);
+const stripe = Stripe(process.env.SECRET_STRIPE_PUBLISHABLE_KEY);
 
 // ─────────────────────────────
 // 🔐 AES-256-GCM helpers for encrypting names
