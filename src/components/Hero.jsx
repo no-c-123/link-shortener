@@ -1,5 +1,6 @@
 import { useState, useRef } from "react";
 import '../styles/Hero-transitions.css'
+import { supabase } from '../lib/supabaseClient'
 
 const Hero = () => {
     const [link, setLink] = useState("");
@@ -19,7 +20,7 @@ const Hero = () => {
     const exampleLinks = [
         { name: "My GitHub", url: "https://github.com/no-c-123" },
         { name: "My Portfolio", url: "https://portfolio-seven-green-92.vercel.app/" },
-        { name: "My LinkedIn", url: "https://www.linkedin.com/in/h%C3%A9ctor-emiliano-leal-prieto-b581a92b1/" },
+        { name: "LinkedIn", url: "https://www.linkedin.com/in/h%C3%A9ctor-emiliano-leal-prieto-b581a92b1/" },
     ];
 
     const handleShorten = async () => {
@@ -34,10 +35,15 @@ const Hero = () => {
         setError("");
 
         try {
+            const { data : { session } } = await supabase.auth.getSession();
+
             const backendUrl = import.meta.env.PUBLIC_BACKEND_URL || 'https://link-shortener-backend-production.up.railway.app';
             const response = await fetch(`${backendUrl}/shorten`, {
                 method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
+                headers: { 
+                    'Content-Type': 'application/json',
+                    ...(session?.access_token && { 'Authorization': `Bearer ${session.access_token}` })
+                },
                 body: JSON.stringify({ 
                     originalUrl: link,
                     customCode: customCode.trim() || undefined
