@@ -1,0 +1,95 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/NavBar';
+import Footer from '../components/Footer';
+---
+
+<Layout title="Privacy Policy">
+  <Navbar client:load />
+  
+  <main class="min-h-screen pt-24 pb-12 px-4 relative overflow-hidden">
+    <!-- Background Gradients -->
+    <div class="absolute top-0 left-0 w-full h-full overflow-hidden -z-10 pointer-events-none">
+        <div class="absolute top-[-10%] right-[-10%] w-[40%] h-[40%] bg-purple-600/20 rounded-full blur-[120px]"></div>
+        <div class="absolute bottom-[-10%] left-[-10%] w-[40%] h-[40%] bg-blue-600/20 rounded-full blur-[120px]"></div>
+    </div>
+
+    <div class="max-w-4xl mx-auto">
+      <div class="text-center mb-12">
+        <h1 class="text-5xl md:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-400 mb-4">
+          Privacy Policy
+        </h1>
+        <p class="text-gray-400 text-lg">Last updated: {new Date().toLocaleDateString()}</p>
+      </div>
+
+      <div class="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl p-8 md:p-12 shadow-2xl">
+        <div class="prose prose-invert prose-lg max-w-none">
+          <section class="mb-10">
+            <h2 class="text-2xl font-semibold text-white mb-4 flex items-center gap-3">
+              <span class="bg-purple-500/20 text-purple-400 p-2 rounded-lg text-sm">01</span>
+              Introduction
+            </h2>
+            <p class="text-gray-300 leading-relaxed">
+              Welcome to Link Shortener. We respect your privacy and are committed to protecting your personal data.
+              This privacy policy will inform you as to how we look after your personal data when you visit our website
+              and tell you about your privacy rights and how the law protects you.
+            </p>
+          </section>
+
+          <section class="mb-10">
+            <h2 class="text-2xl font-semibold text-white mb-4 flex items-center gap-3">
+              <span class="bg-blue-500/20 text-blue-400 p-2 rounded-lg text-sm">02</span>
+              Data We Collect
+            </h2>
+            <p class="text-gray-300 leading-relaxed mb-4">
+              We may collect, use, store and transfer different kinds of personal data about you which we have grouped together follows:
+            </p>
+            <ul class="space-y-2 text-gray-300 list-none pl-4 border-l-2 border-white/10">
+              <li class="flex gap-2"><span class="text-purple-400">›</span> <strong class="text-white">Identity Data:</strong> includes first name, last name, username or similar identifier.</li>
+              <li class="flex gap-2"><span class="text-purple-400">›</span> <strong class="text-white">Contact Data:</strong> includes email address.</li>
+              <li class="flex gap-2"><span class="text-purple-400">›</span> <strong class="text-white">Technical Data:</strong> includes internet protocol (IP) address, your login data, browser type and version, time zone setting and location, browser plug-in types and versions, operating system and platform.</li>
+              <li class="flex gap-2"><span class="text-purple-400">›</span> <strong class="text-white">Usage Data:</strong> includes information about how you use our website, products and services.</li>
+            </ul>
+          </section>
+
+          <section class="mb-10">
+            <h2 class="text-2xl font-semibold text-white mb-4 flex items-center gap-3">
+              <span class="bg-pink-500/20 text-pink-400 p-2 rounded-lg text-sm">03</span>
+              How We Use Your Data
+            </h2>
+            <p class="text-gray-300 leading-relaxed mb-4">
+              We will only use your personal data when the law allows us to. Most commonly, we will use your personal data in the following circumstances:
+            </p>
+            <ul class="space-y-2 text-gray-300 list-none pl-4 border-l-2 border-white/10">
+              <li class="flex gap-2"><span class="text-purple-400">›</span> Where we need to perform the contract we are about to enter into or have entered into with you.</li>
+              <li class="flex gap-2"><span class="text-purple-400">›</span> Where it is necessary for our legitimate interests (or those of a third party) and your interests and fundamental rights do not override those interests.</li>
+              <li class="flex gap-2"><span class="text-purple-400">›</span> Where we need to comply with a legal or regulatory obligation.</li>
+            </ul>
+          </section>
+
+          <section class="mb-10">
+            <h2 class="text-2xl font-semibold text-white mb-4 flex items-center gap-3">
+              <span class="bg-green-500/20 text-green-400 p-2 rounded-lg text-sm">04</span>
+              Data Security
+            </h2>
+            <p class="text-gray-300 leading-relaxed">
+              We have put in place appropriate security measures to prevent your personal data from being accidentally lost, used or accessed in an unauthorized way, altered or disclosed. In addition, we limit access to your personal data to those employees, agents, contractors and other third parties who have a business need to know.
+            </p>
+          </section>
+
+          <section>
+            <h2 class="text-2xl font-semibold text-white mb-4 flex items-center gap-3">
+              <span class="bg-yellow-500/20 text-yellow-400 p-2 rounded-lg text-sm">05</span>
+              Contact Us
+            </h2>
+            <p class="text-gray-300 leading-relaxed">
+              If you have any questions about this privacy policy or our privacy practices, please contact us.
+            </p>
+          </section>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>
