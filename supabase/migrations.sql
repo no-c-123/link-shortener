@@ -27,14 +27,17 @@ CREATE TABLE IF NOT EXISTS api_keys (
 -- Add RLS policies for api_keys
 ALTER TABLE api_keys ENABLE ROW LEVEL SECURITY;
 
+DROP POLICY IF EXISTS "Users can view their own API keys" ON api_keys;
 CREATE POLICY "Users can view their own API keys" 
     ON api_keys FOR SELECT 
     USING (auth.uid() = user_id);
 
+DROP POLICY IF EXISTS "Users can create their own API keys" ON api_keys;
 CREATE POLICY "Users can create their own API keys" 
     ON api_keys FOR INSERT 
     WITH CHECK (auth.uid() = user_id);
 
+DROP POLICY IF EXISTS "Users can delete their own API keys" ON api_keys;
 CREATE POLICY "Users can delete their own API keys" 
     ON api_keys FOR DELETE 
     USING (auth.uid() = user_id);
@@ -58,6 +61,7 @@ CREATE TABLE IF NOT EXISTS user_subscriptions (
 -- Add RLS policies for user_subscriptions
 ALTER TABLE user_subscriptions ENABLE ROW LEVEL SECURITY;
 
+DROP POLICY IF EXISTS "Users can view their own subscription" ON user_subscriptions;
 CREATE POLICY "Users can view their own subscription" 
     ON user_subscriptions FOR SELECT 
     USING (auth.uid() = user_id);
@@ -86,21 +90,25 @@ CREATE TRIGGER update_user_subscriptions_updated_at
 ALTER TABLE links ENABLE ROW LEVEL SECURITY;
 
 -- Allow anyone to read links (for redirect functionality)
+DROP POLICY IF EXISTS "Anyone can read links" ON links;
 CREATE POLICY "Anyone can read links" 
     ON links FOR SELECT 
     USING (true);
 
 -- Allow authenticated users to create links
+DROP POLICY IF EXISTS "Authenticated users can create links" ON links;
 CREATE POLICY "Authenticated users can create links" 
     ON links FOR INSERT 
     WITH CHECK (auth.uid() = user_id OR user_id IS NULL);
 
 -- Allow users to update their own links
+DROP POLICY IF EXISTS "Users can update their own links" ON links;
 CREATE POLICY "Users can update their own links" 
     ON links FOR UPDATE 
     USING (auth.uid() = user_id);
 
 -- Allow users to delete their own links
+DROP POLICY IF EXISTS "Users can delete their own links" ON links;
 CREATE POLICY "Users can delete their own links" 
     ON links FOR DELETE 
     USING (auth.uid() = user_id);

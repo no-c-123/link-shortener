@@ -586,7 +586,7 @@ const AccountDashboard = () => {
                                                                         ? 'bg-red-900/50 text-red-300'
                                                                         : 'bg-gray-900/50 text-gray-300'
                                                         }`}>
-                                                            {tx.refunded ? '↩️ REFUNDED' : tx.status.toUpperCase()}
+                                                            {tx.refunded ? '↩️ REFUNDED' : (tx.status || 'unknown').toUpperCase()}
                                                         </span>
                                                         <span className="font-semibold text-lg">
                                                             {tx.plan || 'Payment'} Plan
@@ -603,7 +603,7 @@ const AccountDashboard = () => {
                                                             <span className="text-gray-500">Email:</span>{' '}
                                                             {tx.payer_email}
                                                         </p>
-                                                        {tx.card_brand && (
+                                                        {tx.card_brand && tx.card_last4 && (
                                                             <p>
                                                                 <span className="text-gray-500">Payment method:</span>{' '}
                                                                 {tx.card_brand.charAt(0).toUpperCase() + tx.card_brand.slice(1)} •••• {tx.card_last4}
@@ -628,7 +628,7 @@ const AccountDashboard = () => {
                                                                 {tx.refund_amount > 0 && (
                                                                     <p>
                                                                         <span className="text-gray-500">Refunded amount:</span>{' '}
-                                                                        ${(tx.refund_amount / 100).toFixed(2)} {tx.currency.toUpperCase()}
+                                                                        ${(tx.refund_amount / 100).toFixed(2)} {(tx.currency || 'usd').toUpperCase()}
                                                                     </p>
                                                                 )}
                                                                 {tx.refund_reason && (
