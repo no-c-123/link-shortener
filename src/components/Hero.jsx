@@ -30,6 +30,13 @@ const Hero = () => {
             setError("Please enter a URL");
             return;
         }
+        
+        // Auto-add https:// if no protocol is specified
+        let urlToShorten = link.trim();
+        if (!urlToShorten.match(/^https?:\/\//i)) {
+            urlToShorten = 'https://' + urlToShorten;
+        }
+        
         setLoading(true);
         setShortenedLink("");
         setCopied(false);
@@ -47,7 +54,7 @@ const Hero = () => {
                     ...(session?.access_token && { 'Authorization': `Bearer ${session.access_token}` })
                 },
                 body: JSON.stringify({ 
-                    originalUrl: link,
+                    originalUrl: urlToShorten,
                     customCode: customCode.trim() || undefined
                 }),
             });

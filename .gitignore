@@ -20,6 +20,10 @@ pnpm-debug.log*
 backend/.env
 backend/.env.local
 
+# admin scripts and documentation (security - don't expose premium bypass methods)
+ADMIN_SETUP.md
+backend/scripts/
+
 # macOS-specific files
 .DS_Store
 

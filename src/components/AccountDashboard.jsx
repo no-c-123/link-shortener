@@ -255,17 +255,35 @@ const AccountDashboard = () => {
         }
     };
 
-    const deleteLink = async (code) => {
+    const deleteLink = async (linkId) => {
         try {
-            const { error } = await supabase
-                .from('links')
-                .delete()
-                .eq('code', code);
+            const { data: { session } } = await supabase.auth.getSession();
+            if (!session) {
+                alert('Please log in to delete links');
+                return;
+            }
+
+            const backendUrl = import.meta.env.PUBLIC_BACKEND_URL || 'https://link-shortener-backend-production.up.railway.app';
             
-            if (error) throw error;
-            fetchUserLinks(user.id);
+            const response = await fetch(`${backendUrl}/links/${linkId}`, {
+                method: 'DELETE',
+                headers: {
+                    'Authorization': `Bearer ${session.access_token}`,
+                    'Content-Type': 'application/json'
+                }
+            });
+            
+            if (!response.ok) {
+                const errorData = await response.json().catch(() => ({ error: 'Unknown error' }));
+                throw new Error(errorData.error || 'Failed to delete link');
+            }
+            
+            // Update state by filtering out the deleted link
+            setUserLinks(prevLinks => prevLinks.filter(link => link.id !== linkId));
+            alert('Link deleted successfully!');
         } catch (error) {
             console.error('Error deleting link:', error);
+            alert(error.message || 'Failed to delete link');
         }
     };
 
@@ -511,7 +529,7 @@ const AccountDashboard = () => {
                                                         )}
                                                     </div>
                                                     <button
-                                                        onClick={() => deleteLink(link.code)}
+                                                        onClick={() => deleteLink(link.id)}
                                                         className="text-red-500 hover:text-red-700 ml-4"
                                                     >
                                                         Delete
