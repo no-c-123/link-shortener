@@ -659,12 +659,32 @@ const AccountDashboard = () => {
                         <div>
                             <div className="flex justify-between items-center mb-6">
                                 <h2 className="text-3xl font-bold">API Keys</h2>
-                                <button
-                                    onClick={() => setShowApiKeyModal(true)}
-                                    className="bg-purple-700 hover:bg-purple-800 text-white px-4 py-2 rounded"
-                                >
-                                    Generate New Key
-                                </button>
+                                <div className="flex gap-3">
+                                    <a
+                                        href="/api-docs"
+                                        className="bg-blue-700 hover:bg-blue-800 text-white px-4 py-2 rounded transition inline-flex items-center gap-2"
+                                    >
+                                        <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                                        </svg>
+                                        API Docs
+                                    </a>
+                                    <button
+                                        onClick={() => setShowApiKeyModal(true)}
+                                        className="bg-purple-700 hover:bg-purple-800 text-white px-4 py-2 rounded"
+                                    >
+                                        Generate New Key
+                                    </button>
+                                </div>
+                            </div>
+                            <div className="bg-blue-900/30 border border-blue-500 rounded-lg p-4 mb-6">
+                                <p className="text-blue-300 text-sm">
+                                    <strong>Need help getting started?</strong> Check out our{' '}
+                                    <a href="/api-docs" className="underline hover:text-blue-200">
+                                        API Documentation
+                                    </a>{' '}
+                                    for code examples, endpoint details, and best practices.
+                                </p>
                             </div>
                             {apiKeys.length === 0 ? (
                                 <p className="text-gray-400">No API keys created yet. Generate one to start using the API.</p>

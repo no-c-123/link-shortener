@@ -1,0 +1,234 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="FAQ - SnapLink">
+    <section class="min-h-screen bg-gradient-to-br from-black to-gray-900 text-white py-20 px-4">
+        <div class="max-w-4xl mx-auto">
+            <a href="/" class="text-purple-400 hover:text-purple-300 underline mb-6 inline-block">
+                ← Back to Home
+            </a>
+            
+            <h1 class="text-5xl font-bold mb-4">Frequently Asked Questions</h1>
+            <p class="text-gray-400 text-lg mb-12">Find answers to common questions about SnapLink</p>
+
+            <!-- Support Contact -->
+            <div class="bg-purple-900/30 border border-purple-500 rounded-lg p-6 mb-12">
+                <h2 class="text-2xl font-bold mb-3">Need Help?</h2>
+                <p class="text-gray-300 mb-4">Can't find what you're looking for? Our support team is here to help!</p>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="mailto:support@snaplink.com" class="bg-purple-700 hover:bg-purple-800 text-white px-6 py-3 rounded-lg transition inline-flex items-center justify-center">
+                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                        </svg>
+                        support@snaplink.com
+                    </a>
+                    <a href="https://github.com/no-c-123/link-shortener/issues" target="_blank" rel="noopener noreferrer" class="bg-gray-700 hover:bg-gray-600 text-white px-6 py-3 rounded-lg transition inline-flex items-center justify-center">
+                        <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/>
+                        </svg>
+                        Report Issue on GitHub
+                    </a>
+                </div>
+            </div>
+
+            <!-- FAQ Categories -->
+            <div class="space-y-8">
+                <!-- General -->
+                <div>
+                    <h2 class="text-3xl font-bold mb-6 text-purple-400">General</h2>
+                    <div class="space-y-4">
+                        <details class="bg-zinc-800 rounded-lg p-6 cursor-pointer hover:bg-zinc-750 transition">
+                            <summary class="font-semibold text-xl">What is SnapLink?</summary>
+                            <p class="mt-3 text-gray-300">SnapLink is a modern URL shortening service that allows you to convert long URLs into short, shareable links. It includes features like custom short codes, click analytics, QR code generation, and API access for developers.</p>
+                        </details>
+
+                        <details class="bg-zinc-800 rounded-lg p-6 cursor-pointer hover:bg-zinc-750 transition">
+                            <summary class="font-semibold text-xl">Is SnapLink free to use?</summary>
+                            <p class="mt-3 text-gray-300">Yes! SnapLink offers a free tier with basic features. We also offer premium plans with advanced features like bulk URL shortening, API access, custom analytics, and link expiration settings.</p>
+                        </details>
+
+                        <details class="bg-zinc-800 rounded-lg p-6 cursor-pointer hover:bg-zinc-750 transition">
+                            <summary class="font-semibold text-xl">Do I need an account to shorten URLs?</summary>
+                            <p class="mt-3 text-gray-300">No, you can shorten URLs without an account. However, creating a free account gives you access to link management, analytics, custom codes, and the ability to edit or delete your links.</p>
+                        </details>
+
+                        <details class="bg-zinc-800 rounded-lg p-6 cursor-pointer hover:bg-zinc-750 transition">
+                            <summary class="font-semibold text-xl">How long do shortened links last?</summary>
+                            <p class="mt-3 text-gray-300">By default, links are permanent and don't expire. Premium users can set custom expiration dates for temporary links. Anonymous links (created without an account) are kept indefinitely unless they violate our terms of service.</p>
+                        </details>
+                    </div>
+                </div>
+
+                <!-- Features -->
+                <div>
+                    <h2 class="text-3xl font-bold mb-6 text-purple-400">Features</h2>
+                    <div class="space-y-4">
+                        <details class="bg-zinc-800 rounded-lg p-6 cursor-pointer hover:bg-zinc-750 transition">
+                            <summary class="font-semibold text-xl">Can I customize my short links?</summary>
+                            <p class="mt-3 text-gray-300">Yes! You can create custom short codes for your links. For example, instead of snaplink.com/abc123, you can use snaplink.com/my-blog. Custom codes must be unique, alphanumeric, and can include hyphens.</p>
+                        </details>
+
+                        <details class="bg-zinc-800 rounded-lg p-6 cursor-pointer hover:bg-zinc-750 transition">
+                            <summary class="font-semibold text-xl">What analytics are available?</summary>
+                            <p class="mt-3 text-gray-300">Every shortened link includes click tracking. With an account, you can view total clicks, creation date, and click history for all your links. Premium users get advanced analytics including geographic data, referrer information, and device statistics.</p>
+                        </details>
+
+                        <details class="bg-zinc-800 rounded-lg p-6 cursor-pointer hover:bg-zinc-750 transition">
+                            <summary class="font-semibold text-xl">How do QR codes work?</summary>
+                            <p class="mt-3 text-gray-300">After shortening a link, click the "Show QR" button to generate a scannable QR code. You can download and use this code in print materials, presentations, or anywhere you need quick mobile access to your link.</p>
+                        </details>
+
+                        <details class="bg-zinc-800 rounded-lg p-6 cursor-pointer hover:bg-zinc-750 transition">
+                            <summary class="font-semibold text-xl">Can I edit a shortened link?</summary>
+                            <p class="mt-3 text-gray-300">Yes! If you're logged in and own the link, you can edit the destination URL or set an expiration date. The short code itself cannot be changed, but you can delete and recreate the link with a new code if needed.</p>
+                        </details>
+
+                        <details class="bg-zinc-800 rounded-lg p-6 cursor-pointer hover:bg-zinc-750 transition">
+                            <summary class="font-semibold text-xl">What is bulk shortening?</summary>
+                            <p class="mt-3 text-gray-300">Bulk shortening allows you to shorten up to 100 URLs at once through our API or dashboard. This is perfect for marketing campaigns, social media management, or any situation where you need to process many links quickly.</p>
+                        </details>
+                    </div>
+                </div>
+
+                <!-- API & Developers -->
+                <div>
+                    <h2 class="text-3xl font-bold mb-6 text-purple-400">API & Developers</h2>
+                    <div class="space-y-4">
+                        <details class="bg-zinc-800 rounded-lg p-6 cursor-pointer hover:bg-zinc-750 transition">
+                            <summary class="font-semibold text-xl">Does SnapLink have an API?</summary>
+                            <p class="mt-3 text-gray-300">Yes! We provide a full REST API for developers. You can generate API keys from your account dashboard and use them to programmatically shorten URLs, retrieve analytics, and manage your links.</p>
+                        </details>
+
+                        <details class="bg-zinc-800 rounded-lg p-6 cursor-pointer hover:bg-zinc-750 transition">
+                            <summary class="font-semibold text-xl">How do I get an API key?</summary>
+                            <p class="mt-3 text-gray-300">Log in to your account, go to the "API Keys" section in your dashboard, and click "Generate New Key". Copy and save your key immediately as it's only shown once for security reasons.</p>
+                        </details>
+
+                        <details class="bg-zinc-800 rounded-lg p-6 cursor-pointer hover:bg-zinc-750 transition">
+                            <summary class="font-semibold text-xl">What are the API rate limits?</summary>
+                            <p class="mt-3 text-gray-300">Free tier: 20 requests per 15 minutes for shortening, 100 requests per 15 minutes for other endpoints. Premium users get higher limits. Rate limit information is included in API response headers.</p>
+                        </details>
+
+                        <details class="bg-zinc-800 rounded-lg p-6 cursor-pointer hover:bg-zinc-750 transition">
+                            <summary class="font-semibold text-xl">Where can I find API documentation?</summary>
+                            <p class="mt-3 text-gray-300">Complete API documentation is available in our <a href="https://github.com/no-c-123/link-shortener/blob/main/API_DOCUMENTATION.md" class="text-purple-400 hover:underline" target="_blank" rel="noopener noreferrer">GitHub repository</a>. It includes endpoint details, request/response examples, and code samples in multiple languages.</p>
+                        </details>
+                    </div>
+                </div>
+
+                <!-- Account & Security -->
+                <div>
+                    <h2 class="text-3xl font-bold mb-6 text-purple-400">Account & Security</h2>
+                    <div class="space-y-4">
+                        <details class="bg-zinc-800 rounded-lg p-6 cursor-pointer hover:bg-zinc-750 transition">
+                            <summary class="font-semibold text-xl">How do I reset my password?</summary>
+                            <p class="mt-3 text-gray-300">On the login page, click "Forgot Password?" and enter your email. You'll receive a secure reset link. You can also change your password anytime from your account dashboard.</p>
+                        </details>
+
+                        <details class="bg-zinc-800 rounded-lg p-6 cursor-pointer hover:bg-zinc-750 transition">
+                            <summary class="font-semibold text-xl">Is my data secure?</summary>
+                            <p class="mt-3 text-gray-300">Yes! We use industry-standard security practices including AES-256-GCM encryption for sensitive data, secure password hashing, HTTPS everywhere, and rate limiting to prevent abuse. We never sell or share your data with third parties.</p>
+                        </details>
+
+                        <details class="bg-zinc-800 rounded-lg p-6 cursor-pointer hover:bg-zinc-750 transition">
+                            <summary class="font-semibold text-xl">Can I delete my account?</summary>
+                            <p class="mt-3 text-gray-300">Yes, you can request account deletion by contacting support@snaplink.com. We'll delete your account and all associated data within 30 days. Note that shortened links may remain active during this period to prevent breaking existing references.</p>
+                        </details>
+
+                        <details class="bg-zinc-800 rounded-lg p-6 cursor-pointer hover:bg-zinc-750 transition">
+                            <summary class="font-semibold text-xl">How can I export my data?</summary>
+                            <p class="mt-3 text-gray-300">In your account dashboard under "My Links", you can export all your links and analytics as CSV or JSON files. This includes destination URLs, click counts, creation dates, and more.</p>
+                        </details>
+                    </div>
+                </div>
+
+                <!-- Payments & Billing -->
+                <div>
+                    <h2 class="text-3xl font-bold mb-6 text-purple-400">Payments & Billing</h2>
+                    <div class="space-y-4">
+                        <details class="bg-zinc-800 rounded-lg p-6 cursor-pointer hover:bg-zinc-750 transition">
+                            <summary class="font-semibold text-xl">What payment methods do you accept?</summary>
+                            <p class="mt-3 text-gray-300">We accept all major credit cards (Visa, MasterCard, American Express, Discover) and debit cards through our secure payment processor, Stripe. We don't store your card information on our servers.</p>
+                        </details>
+
+                        <details class="bg-zinc-800 rounded-lg p-6 cursor-pointer hover:bg-zinc-750 transition">
+                            <summary class="font-semibold text-xl">Can I upgrade or downgrade my plan?</summary>
+                            <p class="mt-3 text-gray-300">Yes! You can upgrade your plan anytime from your account dashboard. Downgrades take effect at the end of your current billing period. Contact support@snaplink.com if you need assistance with plan changes.</p>
+                        </details>
+
+                        <details class="bg-zinc-800 rounded-lg p-6 cursor-pointer hover:bg-zinc-750 transition">
+                            <summary class="font-semibold text-xl">What's your refund policy?</summary>
+                            <p class="mt-3 text-gray-300">We offer a 30-day money-back guarantee for first-time purchases. If you're not satisfied, contact support@snaplink.com within 30 days for a full refund. Subsequent renewals are non-refundable but you can cancel anytime.</p>
+                        </details>
+
+                        <details class="bg-zinc-800 rounded-lg p-6 cursor-pointer hover:bg-zinc-750 transition">
+                            <summary class="font-semibold text-xl">Where can I view my transaction history?</summary>
+                            <p class="mt-3 text-gray-300">All your payment history is available in your account dashboard under "Transactions". You can see payment dates, amounts, plans, and card information used for each transaction.</p>
+                        </details>
+                    </div>
+                </div>
+
+                <!-- Troubleshooting -->
+                <div>
+                    <h2 class="text-3xl font-bold mb-6 text-purple-400">Troubleshooting</h2>
+                    <div class="space-y-4">
+                        <details class="bg-zinc-800 rounded-lg p-6 cursor-pointer hover:bg-zinc-750 transition">
+                            <summary class="font-semibold text-xl">My shortened link isn't working</summary>
+                            <p class="mt-3 text-gray-300">First, check if the link has expired (premium feature). Try accessing the link directly in your browser. If it still doesn't work, the original destination might be down or the link may have been deleted. Contact support@snaplink.com with the short code for assistance.</p>
+                        </details>
+
+                        <details class="bg-zinc-800 rounded-lg p-6 cursor-pointer hover:bg-zinc-750 transition">
+                            <summary class="font-semibold text-xl">I can't create a custom code</summary>
+                            <p class="mt-3 text-gray-300">Custom codes must be unique, alphanumeric (letters and numbers), and can include hyphens. They must be 1-20 characters long. If your desired code is taken, try adding numbers or modifying it slightly.</p>
+                        </details>
+
+                        <details class="bg-zinc-800 rounded-lg p-6 cursor-pointer hover:bg-zinc-750 transition">
+                            <summary class="font-semibold text-xl">The QR code isn't scanning</summary>
+                            <p class="mt-3 text-gray-300">Ensure the QR code is displayed clearly and large enough to scan. Try adjusting your camera distance or lighting. If printing, use high quality (300 DPI or higher) and ensure good contrast between the code and background.</p>
+                        </details>
+
+                        <details class="bg-zinc-800 rounded-lg p-6 cursor-pointer hover:bg-zinc-750 transition">
+                            <summary class="font-semibold text-xl">API requests are failing</summary>
+                            <p class="mt-3 text-gray-300">Check that you're using the correct API key in the X-API-Key header. Verify you haven't exceeded rate limits (check X-RateLimit-* headers). Ensure your request format matches our API documentation. For persistent issues, contact support@snaplink.com.</p>
+                        </details>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Still Have Questions -->
+            <div class="mt-16 bg-gradient-to-r from-purple-900/50 to-blue-900/50 rounded-xl p-8 text-center">
+                <h2 class="text-3xl font-bold mb-4">Still Have Questions?</h2>
+                <p class="text-gray-300 mb-6 text-lg">Our support team is here to help you!</p>
+                <a href="mailto:support@snaplink.com" class="bg-purple-700 hover:bg-purple-800 text-white px-8 py-4 rounded-lg transition inline-block text-lg font-semibold">
+                    Contact Support
+                </a>
+                <p class="mt-4 text-sm text-gray-400">Average response time: 24 hours</p>
+            </div>
+        </div>
+    </section>
+</Layout>
+
+<style>
+    details summary {
+        list-style: none;
+    }
+    details summary::-webkit-details-marker {
+        display: none;
+    }
+    details summary::after {
+        content: '+';
+        float: right;
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #a855f7;
+    }
+    details[open] summary::after {
+        content: '−';
+    }
+    details[open] summary {
+        margin-bottom: 1rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid rgba(168, 85, 247, 0.3);
+    }
+</style>

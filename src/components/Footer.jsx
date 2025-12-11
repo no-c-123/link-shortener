@@ -13,12 +13,19 @@ const Footer = () => {
                     <a href="/" className="hover:text-purple-400 transition">Home</a>
                     <a href="/about" className="hover:text-purple-400 transition">About</a>
                     <a href="/pricing" className="hover:text-purple-400 transition">Pricing</a>
+                    <a href="/faq" className="hover:text-purple-400 transition">FAQ</a>
                     <a href="/login" className="hover:text-purple-400 transition">Login</a>
                     <a href="/register" className="hover:text-purple-400 transition">Register</a>
                 </div>
 
-                {/* Legal Links */}
+                {/* Support & Legal Links */}
                 <div className="flex flex-wrap justify-center gap-6">
+                    <a href="mailto:support@snaplink.com" className="hover:text-purple-400 transition flex items-center gap-1">
+                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                        </svg>
+                        Support
+                    </a>
                     <a href="/privacy" className="hover:text-purple-400 transition">Privacy Policy</a>
                     <a href="/terms" className="hover:text-purple-400 transition">Terms of Service</a>
                 </div>
