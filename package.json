@@ -6,7 +6,10 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "test": "vitest",
+    "test:ui": "vitest --ui",
+    "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
     "@astrojs/react": "^4.3.0",
@@ -19,6 +22,7 @@
     "express": "^5.1.0",
     "framer-motion": "^12.23.0",
     "install": "^0.13.0",
+    "qrcode.react": "^4.2.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-intersection-observer": "^9.16.0",
@@ -31,6 +35,12 @@
     "tailwindcss": "^4.1.11"
   },
   "devDependencies": {
-    "@stripe/stripe-js": "^8.1.0"
+    "@stripe/stripe-js": "^8.1.0",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.0",
+    "@vitest/ui": "^4.0.15",
+    "happy-dom": "^20.0.11",
+    "jsdom": "^27.3.0",
+    "vitest": "^4.0.15"
   }
 }

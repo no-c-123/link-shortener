@@ -1,6 +1,7 @@
 import { useState, useRef } from "react";
 import '../styles/Hero-transitions.css'
 import { supabase } from '../lib/supabaseClient'
+import { QRCodeSVG } from 'qrcode.react';
 
 const Hero = () => {
     const [link, setLink] = useState("");
@@ -10,6 +11,7 @@ const Hero = () => {
     const [copied, setCopied] = useState(false);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
+    const [showQR, setShowQR] = useState(false);
     const inputRef = useRef(null);
 
     const [previewData, setPreviewData] = useState(null);
@@ -177,6 +179,12 @@ const Hero = () => {
                     >
                         {copied ? "Copied!" : "Copy"}
                     </button>
+                    <button
+                        onClick={() => setShowQR(!showQR)}
+                        className="ml-2 text-sm bg-blue-700 hover:bg-blue-800 px-3 py-1 rounded-full text-white"
+                    >
+                        {showQR ? "Hide QR" : "Show QR"}
+                    </button>
                     <div
                     className="relative"
                     style={{ viewTransitionName: "stats" }}
@@ -237,6 +245,13 @@ const Hero = () => {
                             </p>
                         </div>
                     )}
+                </div>
+            )}
+
+            {showQR && shortenedLink && (
+                <div className="mt-6 bg-white p-6 rounded-lg inline-block">
+                    <QRCodeSVG value={shortenedLink} size={200} level="H" />
+                    <p className="text-black text-sm mt-2 text-center">Scan to visit link</p>
                 </div>
             )}
             

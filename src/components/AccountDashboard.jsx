@@ -43,6 +43,9 @@ const AccountDashboard = () => {
                 if (activeSection === 'links') {
                     fetchUserLinks(session.user.id);
                 }
+                if (activeSection === 'apikeys') {
+                    fetchApiKeys();
+                }
             } else {
                 window.location.href = '/login';
             }
@@ -95,6 +98,27 @@ const AccountDashboard = () => {
             console.error('Error fetching links:', error);
         } finally {
             setLinksLoading(false);
+        }
+    };
+
+    const fetchApiKeys = async () => {
+        try {
+            const { data: { session } } = await supabase.auth.getSession();
+            if (!session) return;
+
+            const backendUrl = import.meta.env.PUBLIC_BACKEND_URL || 'https://link-shortener-backend-production.up.railway.app';
+            const response = await fetch(`${backendUrl}/api-keys`, {
+                headers: {
+                    'Authorization': `Bearer ${session.access_token}`
+                }
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                setApiKeys(data);
+            }
+        } catch (error) {
+            console.error('Error fetching API keys:', error);
         }
     };
 
@@ -180,16 +204,55 @@ const AccountDashboard = () => {
         setLoading(false);
     };
 
-    const generateApiKey = () => {
-        const key = `sk_${crypto.randomUUID().replace(/-/g, '')}_${Date.now().toString(36)}`;
-        setGeneratedApiKey(key);
-        // In production, save this to database
-        setApiKeys([...apiKeys, { id: Date.now(), name: newApiKeyName, key, created_at: new Date().toISOString() }]);
-        setNewApiKeyName('');
+    const generateApiKey = async () => {
+        try {
+            const { data: { session } } = await supabase.auth.getSession();
+            if (!session) return;
+
+            const backendUrl = import.meta.env.PUBLIC_BACKEND_URL || 'https://link-shortener-backend-production.up.railway.app';
+            const response = await fetch(`${backendUrl}/api-key`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${session.access_token}`
+                },
+                body: JSON.stringify({ name: newApiKeyName || 'Default Key' })
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                setGeneratedApiKey(data.apiKey);
+                setNewApiKeyName('');
+                fetchApiKeys(); // Refresh the list
+            } else {
+                console.error('Failed to generate API key');
+            }
+        } catch (error) {
+            console.error('Error generating API key:', error);
+        }
     };
 
-    const deleteApiKey = (id) => {
-        setApiKeys(apiKeys.filter(k => k.id !== id));
+    const deleteApiKey = async (id) => {
+        try {
+            const { data: { session } } = await supabase.auth.getSession();
+            if (!session) return;
+
+            const backendUrl = import.meta.env.PUBLIC_BACKEND_URL || 'https://link-shortener-backend-production.up.railway.app';
+            const response = await fetch(`${backendUrl}/api-keys/${id}`, {
+                method: 'DELETE',
+                headers: {
+                    'Authorization': `Bearer ${session.access_token}`
+                }
+            });
+
+            if (response.ok) {
+                fetchApiKeys(); // Refresh the list
+            } else {
+                console.error('Failed to delete API key');
+            }
+        } catch (error) {
+            console.error('Error deleting API key:', error);
+        }
     };
 
     const deleteLink = async (code) => {
@@ -204,6 +267,43 @@ const AccountDashboard = () => {
         } catch (error) {
             console.error('Error deleting link:', error);
         }
+    };
+
+    const exportLinksAsJSON = () => {
+        const dataStr = JSON.stringify(userLinks, null, 2);
+        const dataBlob = new Blob([dataStr], { type: 'application/json' });
+        const url = URL.createObjectURL(dataBlob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = `snaplink-links-${new Date().toISOString().split('T')[0]}.json`;
+        link.click();
+        URL.revokeObjectURL(url);
+    };
+
+    const exportLinksAsCSV = () => {
+        if (userLinks.length === 0) return;
+
+        const headers = ['Code', 'Original URL', 'Click Count', 'Created At', 'Expires At'];
+        const rows = userLinks.map(link => [
+            link.code,
+            link.original,
+            link.click_count || 0,
+            new Date(link.created_at).toLocaleString(),
+            link.expires_at ? new Date(link.expires_at).toLocaleString() : 'Never'
+        ]);
+
+        const csvContent = [
+            headers.join(','),
+            ...rows.map(row => row.map(cell => `"${cell}"`).join(','))
+        ].join('\n');
+
+        const blob = new Blob([csvContent], { type: 'text/csv' });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = `snaplink-links-${new Date().toISOString().split('T')[0]}.csv`;
+        link.click();
+        URL.revokeObjectURL(url);
     };
     
     return (
@@ -328,11 +428,27 @@ const AccountDashboard = () => {
 
                     {activeSection === 'links' && (
                         <div>
-                            <div className="flex justify-between items-center mb-6">
+                            <div className="flex justify-between items-center mb-6 flex-wrap gap-4">
                                 <h2 className="text-3xl font-bold">My Links</h2>
-                                <a href="/" className="bg-purple-700 hover:bg-purple-800 text-white px-4 py-2 rounded">
-                                    Create New Link
-                                </a>
+                                <div className="flex gap-2">
+                                    <button 
+                                        onClick={exportLinksAsJSON}
+                                        className="bg-blue-700 hover:bg-blue-800 text-white px-4 py-2 rounded text-sm"
+                                        disabled={userLinks.length === 0}
+                                    >
+                                        Export JSON
+                                    </button>
+                                    <button 
+                                        onClick={exportLinksAsCSV}
+                                        className="bg-green-700 hover:bg-green-800 text-white px-4 py-2 rounded text-sm"
+                                        disabled={userLinks.length === 0}
+                                    >
+                                        Export CSV
+                                    </button>
+                                    <a href="/" className="bg-purple-700 hover:bg-purple-800 text-white px-4 py-2 rounded">
+                                        Create New Link
+                                    </a>
+                                </div>
                             </div>
                             {linksLoading ? (
                                 <p className="text-gray-400">Loading links...</p>
@@ -558,10 +674,14 @@ const AccountDashboard = () => {
                                         <div key={key.id} className="bg-zinc-900 p-4 rounded-lg flex justify-between items-center">
                                             <div>
                                                 <p className="font-semibold">{key.name || 'Unnamed Key'}</p>
-                                                <p className="text-sm text-gray-400 font-mono">{key.key}</p>
                                                 <p className="text-xs text-gray-500 mt-2">
                                                     Created: {new Date(key.created_at).toLocaleDateString()}
                                                 </p>
+                                                {key.last_used_at && (
+                                                    <p className="text-xs text-gray-500">
+                                                        Last used: {new Date(key.last_used_at).toLocaleDateString()}
+                                                    </p>
+                                                )}
                                             </div>
                                             <button
                                                 onClick={() => deleteApiKey(key.id)}

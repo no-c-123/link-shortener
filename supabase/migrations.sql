@@ -6,6 +6,14 @@ BEGIN
     END IF;
 END $$;
 
+-- Add expires_at column to links table if it doesn't exist
+DO $$ 
+BEGIN 
+    IF NOT EXISTS (SELECT 1 FROM information_schema.columns WHERE table_name = 'links' AND column_name = 'expires_at') THEN
+        ALTER TABLE links ADD COLUMN expires_at TIMESTAMP WITH TIME ZONE;
+    END IF;
+END $$;
+
 -- Create api_keys table
 CREATE TABLE IF NOT EXISTS api_keys (
     id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
