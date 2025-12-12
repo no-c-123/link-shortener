@@ -1,8 +1,10 @@
 ---
 import Layout from "../layouts/Layout.astro"
-import AccountDashboard from "../components/AccountDashboard"
+import NavBar from '../components/NavBar'
+import AccountDashboard from '../components/AccountDashboard'
 ---
 
 <Layout>
-    <AccountDashboard client:load/>
+    <NavBar client:load />
+    <AccountDashboard client:load />
 </Layout>

@@ -1,8 +1,10 @@
 ---
 import Layout from "../layouts/Layout.astro"
-import Payments from"../components/Payment"
+import NavBar from '../components/NavBar'
+import PaymentComponent from '../components/Payment'
 ---
 
-<Layout>
-    <Payments client:load/>
+<Layout title="Payment">
+    <NavBar client:load />
+    <PaymentComponent client:load />
 </Layout>

@@ -1,8 +1,10 @@
 ---
 import Layout from "../layouts/Layout.astro"
-import Register1 from "../components/Register"
+import NavBar from '../components/NavBar'
+import Register1 from '../components/Register'
 ---
 
 <Layout>
-    <Register1 client:load/>
+    <NavBar client:load />
+    <Register1 client:load />
 </Layout>

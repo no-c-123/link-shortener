@@ -94,16 +94,18 @@ function CheckoutForm({ amount, planName, onClose, onSuccess, clientSecret }) {
 
   return (
     <form
-      className="flex flex-col w-full max-w-md space-y-6 p-6"
+      className="flex flex-col w-full space-y-6"
       onSubmit={handleSubmit}
     >
-      <div className="text-center">
-        <h2 className="text-2xl font-bold text-white mb-2">
-          Complete Your Payment
-        </h2>
-        <p className="text-gray-400 text-sm">
-          {planName} Plan - ${(amount / 100).toFixed(2)}
-        </p>
+      <div className="bg-zinc-800/50 rounded-lg p-4 border border-purple-500/10">
+        <div className="flex justify-between items-center">
+          <span className="text-zinc-400">Plan</span>
+          <span className="text-white font-semibold">{planName}</span>
+        </div>
+        <div className="flex justify-between items-center mt-2">
+          <span className="text-zinc-400">Amount</span>
+          <span className="text-purple-400 font-bold text-xl">${(amount / 100).toFixed(2)}</span>
+        </div>
       </div>
 
       {error && (
@@ -130,14 +132,14 @@ function CheckoutForm({ amount, planName, onClose, onSuccess, clientSecret }) {
         <button
           type="button"
           onClick={onClose}
-          className="flex-1 bg-gray-700 hover:bg-gray-600 text-white px-6 py-3 rounded-lg transition"
+          className="flex-1 bg-zinc-700 hover:bg-zinc-600 text-white px-6 py-3 rounded-lg transition"
           disabled={submitting}
         >
           Cancel
         </button>
         <button
           type="submit"
-          className="flex-1 bg-purple-700 hover:bg-purple-800 text-white px-6 py-3 rounded-lg transition disabled:opacity-50 disabled:cursor-not-allowed"
+          className="flex-1 bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-lg transition disabled:opacity-50 disabled:cursor-not-allowed font-semibold"
           disabled={!stripe || !elements || submitting}
         >
           {submitting ? (
@@ -259,24 +261,24 @@ function PaymentModal({ selectedPlan, user, onClose, onSuccess }) {
   );
 
   return (
-    <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4">
-      <div className="bg-zinc-800 rounded-lg w-full max-w-md max-h-[90vh] overflow-y-auto">
-        <div className="sticky top-0 bg-zinc-800 border-b border-gray-700 px-6 py-4 flex justify-between items-center">
-          <h3 className="text-xl font-bold">Payment</h3>
+    <div className="w-full">
+      <div className="w-full max-w-2xl mx-auto">
+        <div className="flex justify-between items-center mb-6">
+          <h3 className="text-2xl font-bold text-white">Payment Details</h3>
           <button
             onClick={onClose}
-            className="text-gray-400 hover:text-white transition"
+            className="text-zinc-400 hover:text-white transition"
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
             </svg>
           </button>
         </div>
-        <div className="p-6">
+        <div>
           {loading && (
             <div className="flex flex-col items-center justify-center p-8 min-h-[300px]">
               <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-500 mb-4"></div>
-              <p className="text-gray-400">Loading payment form...</p>
+              <p className="text-zinc-400">Loading payment form...</p>
             </div>
           )}
 
@@ -285,7 +287,7 @@ function PaymentModal({ selectedPlan, user, onClose, onSuccess }) {
               <p className="text-red-400 mb-4 text-center">{fetchError}</p>
               <button
                 onClick={onClose}
-                className="bg-gray-700 hover:bg-gray-600 text-white px-4 py-2 rounded"
+                className="bg-zinc-700 hover:bg-zinc-600 text-white px-4 py-2 rounded"
               >
                 Close
               </button>
@@ -431,57 +433,99 @@ const Payment = () => {
   }
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-black to-gray-900 text-white px-4 py-8 relative">
-      <a href="/" className="absolute top-4 left-4 text-purple-400 hover:text-purple-300 underline text-sm z-10">
-        ← Back to Home
-      </a>
+    <div className="bg-black min-h-screen pt-[15vh] px-4">
+      <div className="max-w-4xl mx-auto">
+        {/* Header */}
+        <div className="text-center mb-12">
+          <h1 className="text-5xl md:text-6xl font-bold mb-4">
+            <span className="bg-gradient-to-r from-purple-400 via-pink-500 to-purple-600 bg-clip-text text-transparent">
+              Complete Your Purchase
+            </span>
+          </h1>
+          <p className="text-zinc-400 text-lg max-w-2xl mx-auto">
+            Unlock premium features and supercharge your link management with SnapLink
+          </p>
+        </div>
 
-      <div className="w-full max-w-6xl">
-        <h1 className="text-4xl md:text-5xl font-bold text-center mb-4">
-          Choose Your Plan
-        </h1>
-        <p className="text-gray-400 text-center mb-8">
-          Select a plan to get started with SnapLink
-        </p>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-          {plans.map((plan) => (
-            <div
-              key={plan.name}
-              className="border border-gray-700 rounded-lg p-6 bg-zinc-800 hover:bg-zinc-750 transition-all"
-            >
-              <h2 className="text-3xl font-bold mb-2">{plan.name} Plan</h2>
-              <p className="text-4xl font-bold mb-4">
-                ${plan.price}
-                <span className="text-lg font-medium text-gray-400">/mo</span>
-              </p>
-              <ul className="space-y-3 mb-6 text-gray-300">
-                {plan.features.map((feature, index) => (
-                  <li key={index} className="flex items-start">
-                    <span className="text-green-400 mr-2">✅</span>
-                    {feature}
-                  </li>
-                ))}
-              </ul>
-              <button
-                onClick={() => handlePlanSelect(plan.name, plan.amount)}
-                className="w-full bg-purple-700 hover:bg-purple-800 text-white px-6 py-3 rounded-lg transition font-semibold"
+        {/* Plan Selection */}
+        {!selectedPlan && (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
+            {plans.map((plan) => (
+              <div
+                key={plan.name}
+                className="bg-zinc-900/50 border border-purple-500/20 rounded-lg p-8 hover:border-purple-500/40 transition-all"
               >
-                Select {plan.name} Plan
-              </button>
-            </div>
-          ))}
+                <h2 className="text-3xl font-bold text-white mb-2">{plan.name} Plan</h2>
+                <p className="text-4xl font-bold text-purple-400 mb-6">
+                  ${plan.price}
+                  <span className="text-lg font-medium text-zinc-400">/mo</span>
+                </p>
+                <ul className="space-y-3 mb-6 text-zinc-300">
+                  {plan.features.map((feature, index) => (
+                    <li key={index} className="flex items-start">
+                      <span className="text-purple-400 mr-2">✓</span>
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+                <button
+                  onClick={() => handlePlanSelect(plan.name, plan.amount)}
+                  className="w-full bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-lg transition font-semibold"
+                >
+                  Select {plan.name} Plan
+                </button>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* Payment Form Container */}
+        {selectedPlan && (
+          <div className="bg-zinc-900/50 border border-purple-500/20 rounded-lg p-8 shadow-2xl backdrop-blur-sm mb-8">
+            <PaymentModal
+              selectedPlan={selectedPlan}
+              user={user}
+              onClose={handleClose}
+              onSuccess={handleSuccess}
+            />
+          </div>
+        )}
+
+        {/* Security Badge */}
+        <div className="text-center mt-8 text-zinc-500 text-sm">
+          <div className="flex items-center justify-center gap-2">
+            <svg className="w-5 h-5 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"></path>
+            </svg>
+            <span>Secure payment powered by Stripe</span>
+          </div>
+          <p className="mt-2 text-xs">Your payment information is encrypted and secure</p>
+        </div>
+
+        {/* Features Reminder */}
+        <div className="grid md:grid-cols-4 gap-4 mt-12 pb-12">
+          <div className="bg-zinc-900/30 border border-purple-500/10 rounded-lg p-4 text-center">
+            <div className="text-purple-400 text-2xl mb-2">⚡</div>
+            <h3 className="text-white font-semibold mb-1">Instant Activation</h3>
+            <p className="text-zinc-400 text-sm">Premium features unlock immediately after payment</p>
+          </div>
+          <div className="bg-zinc-900/30 border border-purple-500/10 rounded-lg p-4 text-center">
+            <div className="text-purple-400 text-2xl mb-2">🔐</div>
+            <h3 className="text-white font-semibold mb-1">Secure & Private</h3>
+            <p className="text-zinc-400 text-sm">Bank-level encryption for all transactions</p>
+          </div>
+          <div className="bg-zinc-900/30 border border-purple-500/10 rounded-lg p-4 text-center">
+            <div className="text-purple-400 text-2xl mb-2">💳</div>
+            <h3 className="text-white font-semibold mb-1">Cancel Anytime</h3>
+            <p className="text-zinc-400 text-sm">No long-term commitment required</p>
+          </div>
+          <div className="bg-zinc-900/30 border border-purple-500/10 rounded-lg p-4 text-center">
+            <div className="text-purple-400 text-2xl mb-2">❌</div>
+            <h3 className="text-white font-semibold mb-1">Return policy</h3>
+            <p className="text-zinc-400 text-sm">If not satisfied, get a full refund within 30 days</p>
+          </div>
         </div>
       </div>
-
-      {selectedPlan && (
-        <PaymentModal
-          selectedPlan={selectedPlan}
-          user={user}
-          onClose={handleClose}
-          onSuccess={handleSuccess}
-        />
-      )}
     </div>
   );
 };

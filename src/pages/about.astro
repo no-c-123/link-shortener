@@ -1,0 +1,132 @@
+---
+import Layout from '../layouts/Layout.astro';
+import NavBar from '../components/NavBar';
+import Footer from '../components/Footer';
+---
+
+<Layout title="About - SnapLink">
+    <NavBar client:load />
+    
+    <main class="min-h-screen bg-black text-white pt-[15vh] pb-20 px-4">
+        <div class="max-w-6xl mx-auto">
+            
+            <!-- Hero Section -->
+            <div class="text-center mb-16">
+                <h1 class="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-pink-600 bg-clip-text text-transparent">
+                    About SnapLink
+                </h1>
+                <p class="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto">
+                    The modern, powerful, and elegant URL shortener built for everyone
+                </p>
+            </div>
+
+            <!-- Main Content Grid -->
+            <div class="grid md:grid-cols-2 gap-12 mb-20">
+                
+                <!-- What is SnapLink -->
+                <div class="bg-zinc-900/50 backdrop-blur-sm rounded-2xl p-8 border border-purple-500/20">
+                    <h2 class="text-3xl font-bold mb-6 text-purple-400">What is SnapLink?</h2>
+                    <p class="text-gray-300 text-lg leading-relaxed mb-4">
+                        SnapLink is a cutting-edge URL shortening service designed to transform long, unwieldy links into short, memorable, and shareable URLs. Whether you're a content creator, marketer, developer, or just someone who wants cleaner links, SnapLink provides the tools you need.
+                    </p>
+                    <p class="text-gray-300 text-lg leading-relaxed">
+                        Built with modern web technologies and a focus on performance, security, and user experience, SnapLink offers both free and premium features to suit your needs.
+                    </p>
+                </div>
+
+                <!-- Why Choose SnapLink -->
+                <div class="bg-zinc-900/50 backdrop-blur-sm rounded-2xl p-8 border border-purple-500/20">
+                    <h2 class="text-3xl font-bold mb-6 text-purple-400">Why Choose SnapLink?</h2>
+                    <ul class="space-y-4 text-gray-300 text-lg">
+                        <li class="flex items-start">
+                            <span class="text-2xl mr-3">⚡</span>
+                            <span><strong>Lightning Fast:</strong> Instant link shortening with sub-second response times</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-2xl mr-3">🔒</span>
+                            <span><strong>Secure & Private:</strong> Enterprise-grade encryption and data protection</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-2xl mr-3">📊</span>
+                            <span><strong>Analytics Ready:</strong> Track clicks and monitor link performance</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-2xl mr-3">🎨</span>
+                            <span><strong>Clean Design:</strong> Beautiful, intuitive interface with no clutter or ads</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Features Section -->
+            <div class="mb-20">
+                <h2 class="text-4xl font-bold text-center mb-12 text-purple-400">Powerful Features</h2>
+                <div class="grid md:grid-cols-3 gap-8">
+                    
+                    <div class="bg-zinc-900/50 backdrop-blur-sm rounded-xl p-6 border border-purple-500/10 hover:border-purple-500/30 transition">
+                        <div class="text-4xl mb-4">🔗</div>
+                        <h3 class="text-xl font-bold mb-3">Custom Short Links</h3>
+                        <p class="text-gray-400">Create memorable, branded short URLs with custom codes that reflect your content.</p>
+                    </div>
+
+                    <div class="bg-zinc-900/50 backdrop-blur-sm rounded-xl p-6 border border-purple-500/10 hover:border-purple-500/30 transition">
+                        <div class="text-4xl mb-4">📱</div>
+                        <h3 class="text-xl font-bold mb-3">QR Code Generation</h3>
+                        <p class="text-gray-400">Instantly generate QR codes for any shortened link - perfect for offline sharing.</p>
+                    </div>
+
+                    <div class="bg-zinc-900/50 backdrop-blur-sm rounded-xl p-6 border border-purple-500/10 hover:border-purple-500/30 transition">
+                        <div class="text-4xl mb-4">🔑</div>
+                        <h3 class="text-xl font-bold mb-3">API Access</h3>
+                        <p class="text-gray-400">Integrate SnapLink into your applications with our powerful REST API.</p>
+                    </div>
+
+                    <div class="bg-zinc-900/50 backdrop-blur-sm rounded-xl p-6 border border-purple-500/10 hover:border-purple-500/30 transition">
+                        <div class="text-4xl mb-4">⏰</div>
+                        <h3 class="text-xl font-bold mb-3">Link Expiration</h3>
+                        <p class="text-gray-400">Set expiration dates for temporary links - premium feature for enhanced control.</p>
+                    </div>
+
+                    <div class="bg-zinc-900/50 backdrop-blur-sm rounded-xl p-6 border border-purple-500/10 hover:border-purple-500/30 transition">
+                        <div class="text-4xl mb-4">📦</div>
+                        <h3 class="text-xl font-bold mb-3">Bulk Shortening</h3>
+                        <p class="text-gray-400">Process multiple URLs at once with our premium bulk shortening feature.</p>
+                    </div>
+
+                    <div class="bg-zinc-900/50 backdrop-blur-sm rounded-xl p-6 border border-purple-500/10 hover:border-purple-500/30 transition">
+                        <div class="text-4xl mb-4">📈</div>
+                        <h3 class="text-xl font-bold mb-3">Click Analytics</h3>
+                        <p class="text-gray-400">Track and analyze link performance with detailed click statistics.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mission Statement -->
+            <div class="bg-gradient-to-r from-purple-900/30 to-pink-900/30 backdrop-blur-sm rounded-2xl p-12 border border-purple-500/30 text-center">
+                <h2 class="text-3xl font-bold mb-6">Our Mission</h2>
+                <p class="text-xl text-gray-300 leading-relaxed max-w-4xl mx-auto">
+                    At SnapLink, we believe that link sharing should be simple, fast, and beautiful. Our mission is to provide 
+                    the most reliable and user-friendly URL shortening service while maintaining the highest standards of 
+                    security and privacy. Whether you're sharing one link or managing thousands, SnapLink is built to scale 
+                    with your needs.
+                </p>
+            </div>
+
+            <!-- CTA Section -->
+            <div class="text-center mt-16">
+                <h3 class="text-2xl font-bold mb-6">Ready to get started?</h3>
+                <div class="flex gap-4 justify-center">
+                    <a href="/" class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-8 rounded-full transition duration-300">
+                        Try SnapLink Free
+                    </a>
+                    <a href="/pricing" class="bg-white hover:bg-gray-200 text-black font-bold py-3 px-8 rounded-full transition duration-300">
+                        View Pricing
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </main>
+    
+    <Footer />
+</Layout>

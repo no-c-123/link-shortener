@@ -1,6 +1,4 @@
-import React, {useRef} from "react";
-
-
+import React from "react";
 
 const Pricing = () => {
     const featureList = [
@@ -18,14 +16,6 @@ const Pricing = () => {
         ['Link preview customization', 'Change the link title, image, and description shown on social media.'],
     ];
 
-    const buttonPricingRef = useRef(null);
-
-    const handleClick = () => {
-        if(buttonPricingRef.current) {
-            window.location.href = '/payment';
-        }
-    }
-
     return (
         <section id="pricing" className="min-h-screen flex flex-col justify-center items-center text-center bg-gradient-to-br from-black to-gray-900 text-white px-4 py-16">
             <h2 className="text-4xl md:text-6xl font-bold mb-10">Pricing</h2>
@@ -42,7 +32,7 @@ const Pricing = () => {
                         <li>✅ Secure API handling</li>
                         <li>✅ Basic link history</li>
                     </ul>
-                    <button className="bg-purple-700 hover:bg-purple-800 text-white px-6 py-3 rounded-full transition">
+                    <button className="bg-purple-700 hover:bg-purple-800 text-white px-6 py-3 rounded-full transition" onClick={() => window.location.href = '/'}>
                         Get Started
                     </button>
                 </div>
@@ -58,7 +48,7 @@ const Pricing = () => {
                         <li>✅ Limited custom branded links</li>
                         <li>✅ Standard API access</li>
                     </ul>
-                    <button ref={buttonPricingRef} onClick={handleClick}  className="bg-purple-700 hover:bg-purple-800 text-white px-6 py-3 rounded-full transition">
+                    <button onClick={() => window.location.href = '/payment'} className="bg-purple-700 hover:bg-purple-800 text-white px-6 py-3 rounded-full transition">
                         Upgrade Plan
                     </button>
                 </div>
@@ -76,7 +66,7 @@ const Pricing = () => {
                         <li>✅ UTM builder integration</li>
                         <li>✅ Link preview customization</li>
                     </ul>
-                    <button ref={buttonPricingRef} onClick={handleClick}  className="bg-purple-700 hover:bg-purple-800 text-white px-6 py-3 rounded-full transition">
+                    <button onClick={() => window.location.href = '/payment'} className="bg-purple-700 hover:bg-purple-800 text-white px-6 py-3 rounded-full transition">
                         Upgrade Plan
                     </button>
                 </div>

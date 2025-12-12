@@ -1,0 +1,283 @@
+---
+import Layout from '../layouts/Layout.astro';
+import NavBar from '../components/NavBar';
+import Footer from '../components/Footer';
+---
+
+<Layout title="Pricing - SnapLink">
+    <NavBar client:load />
+    
+    <main class="min-h-screen bg-black text-white pt-[15vh] pb-20 px-4">
+        <div class="max-w-6xl mx-auto">
+            
+            <!-- Hero Section -->
+            <div class="text-center mb-16">
+                <h1 class="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-purple-400 to-pink-600 bg-clip-text text-transparent">
+                    Simple, Transparent Pricing
+                </h1>
+                <p class="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto">
+                    Choose the perfect plan for your needs. Start free, upgrade anytime.
+                </p>
+            </div>
+
+            <!-- Pricing Cards -->
+            <div class="grid md:grid-cols-3 gap-8 mb-20">
+                
+                <!-- Free Plan -->
+                <div class="bg-zinc-900/50 backdrop-blur-sm rounded-2xl p-8 border border-purple-500/20 hover:border-purple-500/40 transition-all duration-300">
+                    <div class="text-center mb-6">
+                        <h3 class="text-2xl font-bold mb-2">Free</h3>
+                        <div class="text-5xl font-bold mb-2">$0</div>
+                        <p class="text-gray-400">Forever free</p>
+                    </div>
+                    <ul class="space-y-4 mb-8 text-gray-300">
+                        <li class="flex items-start">
+                            <span class="text-green-400 mr-3 mt-1">✓</span>
+                            <span>Unlimited link shortening</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-400 mr-3 mt-1">✓</span>
+                            <span>Instant access</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-400 mr-3 mt-1">✓</span>
+                            <span>Clean, ad-free interface</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-400 mr-3 mt-1">✓</span>
+                            <span>Secure API handling</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-400 mr-3 mt-1">✓</span>
+                            <span>Basic link history</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-400 mr-3 mt-1">✓</span>
+                            <span>Basic click tracking</span>
+                        </li>
+                    </ul>
+                    <a href="/" class="block w-full bg-zinc-800 hover:bg-zinc-700 text-white text-center font-semibold py-3 rounded-full transition duration-300">
+                        Get Started
+                    </a>
+                </div>
+
+                <!-- Starter Plan - Featured -->
+                <div class="bg-gradient-to-br from-purple-900/50 to-pink-900/50 backdrop-blur-sm rounded-2xl p-8 border-2 border-purple-500 relative transform md:scale-105 hover:scale-110 transition-all duration-300">
+                    <div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-gradient-to-r from-purple-500 to-pink-500 text-white px-4 py-1 rounded-full text-sm font-bold">
+                        MOST POPULAR
+                    </div>
+                    <div class="text-center mb-6">
+                        <h3 class="text-2xl font-bold mb-2">Starter</h3>
+                        <div class="text-5xl font-bold mb-2">$5</div>
+                        <p class="text-gray-300">per month</p>
+                    </div>
+                    <ul class="space-y-4 mb-8 text-gray-200">
+                        <li class="flex items-start">
+                            <span class="text-green-400 mr-3 mt-1">✓</span>
+                            <span><strong>Everything in Free</strong></span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-400 mr-3 mt-1">✓</span>
+                            <span>Editable destination URLs</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-400 mr-3 mt-1">✓</span>
+                            <span>Password-protected links</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-400 mr-3 mt-1">✓</span>
+                            <span>Limited custom branded links</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-400 mr-3 mt-1">✓</span>
+                            <span>Standard API access</span>
+                        </li>
+                    </ul>
+                    <a href="/payment" class="block w-full bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white text-center font-bold py-3 rounded-full transition duration-300">
+                        Upgrade to Starter
+                    </a>
+                </div>
+
+                <!-- Pro Plan -->
+                <div class="bg-zinc-900/50 backdrop-blur-sm rounded-2xl p-8 border border-purple-500/20 hover:border-purple-500/40 transition-all duration-300">
+                    <div class="text-center mb-6">
+                        <h3 class="text-2xl font-bold mb-2">Pro</h3>
+                        <div class="text-5xl font-bold mb-2">$10</div>
+                        <p class="text-gray-400">per month</p>
+                    </div>
+                    <ul class="space-y-4 mb-8 text-gray-300">
+                        <li class="flex items-start">
+                            <span class="text-green-400 mr-3 mt-1">✓</span>
+                            <span><strong>Everything in Starter</strong></span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-400 mr-3 mt-1">✓</span>
+                            <span>Advanced link analytics</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-400 mr-3 mt-1">✓</span>
+                            <span>Bulk link shortening</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-400 mr-3 mt-1">✓</span>
+                            <span>Full custom branded links</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-400 mr-3 mt-1">✓</span>
+                            <span>Priority support</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-400 mr-3 mt-1">✓</span>
+                            <span>UTM builder integration</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-400 mr-3 mt-1">✓</span>
+                            <span>Link preview customization</span>
+                        </li>
+                    </ul>
+                    <a href="/payment" class="block w-full bg-purple-600 hover:bg-purple-700 text-white text-center font-semibold py-3 rounded-full transition duration-300">
+                        Upgrade to Pro
+                    </a>
+                </div>
+            </div>
+
+            <!-- Feature Comparison Table -->
+            <div class="mb-20">
+                <h2 class="text-4xl font-bold text-center mb-12 text-purple-400">Feature Comparison</h2>
+                <div class="overflow-x-auto">
+                    <table class="w-full border-collapse">
+                        <thead>
+                            <tr class="border-b border-purple-500/30">
+                                <th class="text-left py-4 px-6 text-gray-400 font-semibold">Feature</th>
+                                <th class="text-center py-4 px-6 text-gray-400 font-semibold">Free</th>
+                                <th class="text-center py-4 px-6 bg-purple-900/20 text-purple-400 font-bold">Starter</th>
+                                <th class="text-center py-4 px-6 text-gray-400 font-semibold">Pro</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-gray-300">
+                            <tr class="border-b border-zinc-800">
+                                <td class="py-4 px-6">One-click link shortening</td>
+                                <td class="text-center py-4 px-6 text-green-400">✓</td>
+                                <td class="text-center py-4 px-6 bg-purple-900/10 text-green-400">✓</td>
+                                <td class="text-center py-4 px-6 text-green-400">✓</td>
+                            </tr>
+                            <tr class="border-b border-zinc-800">
+                                <td class="py-4 px-6">Basic click tracking</td>
+                                <td class="text-center py-4 px-6 text-green-400">✓</td>
+                                <td class="text-center py-4 px-6 bg-purple-900/10 text-green-400">✓</td>
+                                <td class="text-center py-4 px-6 text-green-400">✓</td>
+                            </tr>
+                            <tr class="border-b border-zinc-800">
+                                <td class="py-4 px-6">Editable destination URLs</td>
+                                <td class="text-center py-4 px-6 text-red-400">✗</td>
+                                <td class="text-center py-4 px-6 bg-purple-900/10 text-green-400">✓</td>
+                                <td class="text-center py-4 px-6 text-green-400">✓</td>
+                            </tr>
+                            <tr class="border-b border-zinc-800">
+                                <td class="py-4 px-6">Custom branded links</td>
+                                <td class="text-center py-4 px-6 text-red-400">✗</td>
+                                <td class="text-center py-4 px-6 bg-purple-900/10">Limited</td>
+                                <td class="text-center py-4 px-6 text-green-400">✓</td>
+                            </tr>
+                            <tr class="border-b border-zinc-800">
+                                <td class="py-4 px-6">Password-protected links</td>
+                                <td class="text-center py-4 px-6 text-red-400">✗</td>
+                                <td class="text-center py-4 px-6 bg-purple-900/10 text-green-400">✓</td>
+                                <td class="text-center py-4 px-6 text-green-400">✓</td>
+                            </tr>
+                            <tr class="border-b border-zinc-800">
+                                <td class="py-4 px-6">Expiration dates</td>
+                                <td class="text-center py-4 px-6 text-red-400">✗</td>
+                                <td class="text-center py-4 px-6 bg-purple-900/10 text-red-400">✗</td>
+                                <td class="text-center py-4 px-6 text-green-400">✓</td>
+                            </tr>
+                            <tr class="border-b border-zinc-800">
+                                <td class="py-4 px-6">Advanced link analytics</td>
+                                <td class="text-center py-4 px-6 text-red-400">✗</td>
+                                <td class="text-center py-4 px-6 bg-purple-900/10 text-red-400">✗</td>
+                                <td class="text-center py-4 px-6 text-green-400">✓</td>
+                            </tr>
+                            <tr class="border-b border-zinc-800">
+                                <td class="py-4 px-6">Bulk link shortening</td>
+                                <td class="text-center py-4 px-6 text-red-400">✗</td>
+                                <td class="text-center py-4 px-6 bg-purple-900/10 text-red-400">✗</td>
+                                <td class="text-center py-4 px-6 text-green-400">✓</td>
+                            </tr>
+                            <tr class="border-b border-zinc-800">
+                                <td class="py-4 px-6">API access for developers</td>
+                                <td class="text-center py-4 px-6">Limited</td>
+                                <td class="text-center py-4 px-6 bg-purple-900/10">Standard</td>
+                                <td class="text-center py-4 px-6 text-green-400">✓</td>
+                            </tr>
+                            <tr class="border-b border-zinc-800">
+                                <td class="py-4 px-6">Priority support</td>
+                                <td class="text-center py-4 px-6 text-red-400">✗</td>
+                                <td class="text-center py-4 px-6 bg-purple-900/10 text-red-400">✗</td>
+                                <td class="text-center py-4 px-6 text-green-400">✓</td>
+                            </tr>
+                            <tr class="border-b border-zinc-800">
+                                <td class="py-4 px-6">UTM builder integration</td>
+                                <td class="text-center py-4 px-6 text-red-400">✗</td>
+                                <td class="text-center py-4 px-6 bg-purple-900/10 text-red-400">✗</td>
+                                <td class="text-center py-4 px-6 text-green-400">✓</td>
+                            </tr>
+                            <tr class="border-b border-zinc-800">
+                                <td class="py-4 px-6">Link preview customization</td>
+                                <td class="text-center py-4 px-6 text-red-400">✗</td>
+                                <td class="text-center py-4 px-6 bg-purple-900/10 text-red-400">✗</td>
+                                <td class="text-center py-4 px-6 text-green-400">✓</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- FAQ Section -->
+            <div class="mb-20">
+                <h2 class="text-4xl font-bold text-center mb-12 text-purple-400">Frequently Asked Questions</h2>
+                <div class="grid md:grid-cols-2 gap-8">
+                    
+                    <div class="bg-zinc-900/50 backdrop-blur-sm rounded-xl p-6 border border-purple-500/10">
+                        <h3 class="text-xl font-bold mb-3 text-white">Can I upgrade or downgrade anytime?</h3>
+                        <p class="text-gray-400">Yes! You can upgrade, downgrade, or cancel your subscription at any time. Changes take effect immediately.</p>
+                    </div>
+
+                    <div class="bg-zinc-900/50 backdrop-blur-sm rounded-xl p-6 border border-purple-500/10">
+                        <h3 class="text-xl font-bold mb-3 text-white">What payment methods do you accept?</h3>
+                        <p class="text-gray-400">We accept all major credit cards (Visa, MasterCard, American Express) through our secure payment processor Stripe.</p>
+                    </div>
+
+                    <div class="bg-zinc-900/50 backdrop-blur-sm rounded-xl p-6 border border-purple-500/10">
+                        <h3 class="text-xl font-bold mb-3 text-white">Is there a free trial for Pro?</h3>
+                        <p class="text-gray-400">While we don't offer a traditional trial, our Free plan gives you full access to basic features. Upgrade when you're ready for more power.</p>
+                    </div>
+
+                    <div class="bg-zinc-900/50 backdrop-blur-sm rounded-xl p-6 border border-purple-500/10">
+                        <h3 class="text-xl font-bold mb-3 text-white">What happens to my links if I cancel?</h3>
+                        <p class="text-gray-400">Your links will continue to work! Premium features will be disabled, but all your shortened links remain active forever.</p>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- CTA Section -->
+            <div class="bg-gradient-to-r from-purple-900/30 to-pink-900/30 backdrop-blur-sm rounded-2xl p-12 border border-purple-500/30 text-center">
+                <h2 class="text-3xl font-bold mb-4">Ready to get started?</h2>
+                <p class="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
+                    Join thousands of users who trust SnapLink for their link shortening needs.
+                </p>
+                <div class="flex gap-4 justify-center flex-wrap">
+                    <a href="/" class="bg-white hover:bg-gray-200 text-black font-bold py-3 px-8 rounded-full transition duration-300">
+                        Start Free
+                    </a>
+                    <a href="/payment" class="bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-8 rounded-full transition duration-300">
+                        Upgrade Now
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </main>
+    
+    <Footer />
+</Layout>

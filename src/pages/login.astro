@@ -1,8 +1,10 @@
 ---
 import Layout from "../layouts/Layout.astro"
+import NavBar from '../components/NavBar'
 import Login1 from '../components/Login'
 ---
 
 <Layout>
+    <NavBar client:load />
     <Login1 client:load />
 </Layout>
